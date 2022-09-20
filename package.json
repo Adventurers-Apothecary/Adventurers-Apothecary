@@ -1,7 +1,7 @@
 {
-  "name": "fs-app-template",
+  "name": "adventurers-apothecary",
   "version": "2.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "Our Grace Shopper Project! Get your apothecary garden on the go!",
   "main": "index.js",
   "scripts": {
     "build": "webpack",

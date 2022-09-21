@@ -17,7 +17,7 @@ const requireToken = async(req, res, next) => {
 
 const isAdmin = (req, res, next) => {
     if(!req.user.isAdmin){
-        return res.status(403).send('Only admins may see all user information.')
+        return res.status(403).send('Only admins may perform this function.')
       } else{
           next()
       }

@@ -18,6 +18,8 @@ const Product = require("./models/Product");
 // associated with the user's id
 
 // associations here:
+Product.belongsTo(User)
+User.hasMany(Product)
 
 module.exports = {
   db,

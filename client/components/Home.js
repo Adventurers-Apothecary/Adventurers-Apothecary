@@ -4,13 +4,23 @@ import {connect} from 'react-redux'
 /**
  * COMPONENT
  */
-export const Home = props => {
+export const Home = (props, {isLoggedIn}) => {
   const {username} = props
 
   return (
-    <div>
-      <h3>Welcome, {username}</h3>
+    <div className="home">
+      {isLoggedIn ? (
+        <div>
+          <h2>Welcome to your apothecary!</h2>
+        </div>
+      ) : (
+        <div>
+          <h2>Welcome to your apothecary {username}!</h2>
+        </div>
+      )}
     </div>
+    
+
   )
 }
 

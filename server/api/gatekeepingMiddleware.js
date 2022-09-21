@@ -15,6 +15,14 @@ const requireToken = async(req, res, next) => {
     }
 }
 
+const isAdmin = (req, res, next) => {
+    if(!req.user.isAdmin){
+        return res.status(403).send('Only admins may see all user information.')
+      } else{
+          next()
+      }
+}
 module.exports = {
-    requireToken
+    requireToken,
+    isAdmin
 }

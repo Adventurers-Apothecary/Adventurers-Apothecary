@@ -17,7 +17,7 @@
   align-self: center;
 }
 
-.product {
+.product-view {
   display: flex;
   flex-direction: column;
   min-height: min-content;
@@ -31,6 +31,6 @@
   padding: 5px;
 }
 
-.product h2 {
+.product-view h2 {
   margin-bottom: 0px;
 }

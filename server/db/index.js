@@ -4,28 +4,33 @@ const db = require("./db");
 
 const User = require("./models/User");
 const Product = require("./models/Product");
-// const Cart = require("./models/Cart");
+const Cart = require("./models/Cart");
+const { Sequelize } = require("sequelize");
 
-// associations could go here!
-// one user has many cart instances
-// one cart instance has one user
-// one cart instance has one product
-
-// notes on cart model:
-// every instance keeps track of one product id and user id
-// with a quantity field to keep track of quantities
-// when finding a user's overall cart you could query the model to find every instance
-// associated with the user's id
+// defining cart_products through table
+const Cart_Products = db.define("cart_products", {
+  quantity: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0,
+  },
+});
 
 // associations here:
-Product.belongsTo(User)
-User.hasMany(Product)
+// Product.belongsTo(User)
+// User.hasMany(Product)
+
+Cart.belongsTo(User);
+User.hasMany(Cart);
+
+Cart.belongsToMany(Product, { through: "cart_products" });
+Product.belongsToMany(Cart, { through: "cart_products" });
 
 module.exports = {
   db,
   models: {
     User,
     Product,
-    // Cart
+    Cart,
+    Cart_Products,
   },
 };

@@ -8,7 +8,7 @@ const Cart = require("./models/Cart");
 const { Sequelize } = require("sequelize");
 
 // defining cart_products through table
-export const Cart_Products = db.define("cart_products", {
+const Cart_Products = db.define("cart_products", {
   quantity: {
     type: Sequelize.INTEGER,
     defaultValue: 0,

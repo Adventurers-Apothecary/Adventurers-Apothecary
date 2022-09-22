@@ -1,7 +1,12 @@
 'use strict'
 
-const {db, models: {User, Product} } = require('../server/db');
+const { Sequelize } = require("sequelize");
+const { randUserName } = require("@ngneat/falso");
 
+const {
+  db,
+  models: { User, Product, Cart, Cart_Products },
+} = require("../server/db");
 
 /**
  * seed - this function clears the database, updates tables to
@@ -93,9 +98,14 @@ async function seed() {
     User.create({ username: 'murphy', password: '123' }),
   ])
 
-  console.log(`seeded ${users.length} users`)
-  console.log(`seeded ${products.length} products`)
-  console.log(`seeded successfully`)
+  for (let i = 0; i < 20; i++) {
+    await User.create({ username: randUserName(), password: "123" });
+  }
+
+
+  console.log(`seeded ${users.length} users`);
+  console.log(`seeded ${products.length} products`);
+  console.log(`seeded successfully`);
   return {
     users: {
       cody: users[0],

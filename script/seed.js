@@ -1,5 +1,6 @@
 "use strict";
 
+const { Sequelize } = require("sequelize");
 const {
   db,
   models: { User, Product, Cart, Cart_Products },
@@ -120,9 +121,6 @@ async function seed() {
     },
   };
 }
-
-// magic method tests
-// console.log(Object.keys(Cart_Products.prototype));
 
 /*
  We've separated the `seed` function from the `runSeed` function.

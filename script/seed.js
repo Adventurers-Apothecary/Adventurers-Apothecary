@@ -65,24 +65,24 @@ async function seed() {
       name: 'Modern Herbalism',
       price: 15.00,
       category: 'books',
-      imageUrl: '',
-      description: 'A fantastic book that describes verious herbs and the many purposes of the herbs',
+      imageUrl: 'https://i.pinimg.com/736x/80/8a/f1/808af17026c6f59d20a6876768fc2ecb.jpg',
+      description: 'For all of your herbalist needs!',
     }),
 
     Product.create({
       name: 'DIY Apothecary Recipes',
       price: 15.00,
       category: 'books',
-      imageUrl: '',
-      description: 'A book containing all-time popular recipes for at home remedies, teas, and so on',
+      imageUrl: 'https://media.istockphoto.com/photos/brown-leather-cover-picture-id463241697?k=20&m=463241697&s=612x612&w=0&h=Ha2Zv7YGbyBtXDUO2ODOahk1j2DaSQpaTf-28_g4wyc=',
+      description: 'A book containing all-time popular recipes for at home remedies, teas, and so on or to even write your own!',
     }),
 
     Product.create({
-      name: 'Be Your Own Apothecary!',
+      name: 'The Apothecary Secret',
       price: 15.00,
       category: 'books',
-      imageUrl: '',
-      description: 'Become your own at home apothecary with the necessary tools already in your home or specialty tools',
+      imageUrl: 'https://spongekids.com/wp-content/uploads/2014/09/diy-book-cover-ideas/4-old-books-make-great-journals.jpg',
+      description: 'Become your own at home apothecary by learning the secrets of old apothecaries tools',
     }),
 
   ])

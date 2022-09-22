@@ -25,29 +25,29 @@ router.get("/:id", async (req, res, next) => {
 });
 
 router.post("/", requireToken, isAdmin, async (req, res, next) => {
-  try{
-    const product = await Product.create(req.body)
+  try {
+    const product = await Product.create(req.body);
     res.status(201).send(product);
-  } catch(error){
+  } catch (error) {
     next(error);
   }
 });
 
-router.put("/:id", requireToken, isAdmin, async(req, res, next) => {
-  try{
+router.put("/:id", requireToken, isAdmin, async (req, res, next) => {
+  try {
     const product = await Product.findByPk(req.params.id);
-    res.send(await product.update(req.body))
-  } catch(error){
+    res.send(await product.update(req.body));
+  } catch (error) {
     next(error);
   }
 });
 
-router.delete("/:id", requireToken, isAdmin, async(req, res, next) => {
-  try{
+router.delete("/:id", requireToken, isAdmin, async (req, res, next) => {
+  try {
     const product = await Product.findByPk(req.params.id);
-    await product.destroy()
-    res.send(product)
-  } catch(error){
+    await product.destroy();
+    res.send(product);
+  } catch (error) {
     next(error);
   }
 });

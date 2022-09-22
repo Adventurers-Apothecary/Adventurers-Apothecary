@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
-import "./single-product.css";
+import "./css/single-product.css";
 
 import {
   fetchSingleProduct,
   setSingleProduct,
-} from "../../store/redux/singleProduct";
+} from "../store/redux/singleProduct";
 
 function SingleProduct(props) {
   const { id } = useParams();
@@ -22,7 +22,7 @@ function SingleProduct(props) {
   return (
     <div className="single-product-container">
       {product && (
-        <div className="product">
+        <div className="product-view">
           <h2>{product.name}</h2>
           <h3>Price: ${product.price}</h3>
           <img
@@ -54,11 +54,3 @@ const mapDispatch = (dispatch) => {
 };
 
 export default connect(mapState, mapDispatch)(SingleProduct);
-
-//on component mount:
-//await getSingleProduct(id)
-//component will unmount
-//clear singleProduct
-
-//render
-//set var names for product

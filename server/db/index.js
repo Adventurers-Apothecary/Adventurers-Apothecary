@@ -16,9 +16,6 @@ const Cart_Products = db.define("cart_products", {
 });
 
 // associations here:
-// Product.belongsTo(User)
-// User.hasMany(Product)
-
 Cart.belongsTo(User);
 User.hasMany(Cart);
 

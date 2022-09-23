@@ -1,6 +1,14 @@
+
+'use strict'
+
+const { Sequelize } = require("sequelize");
+const { randUserName } = require("@ngneat/falso");
+
+=======
 "use strict";
 
 const { Sequelize } = require("sequelize");
+
 const {
   db,
   models: { User, Product, Cart, Cart_Products },
@@ -110,6 +118,14 @@ async function seed() {
     User.create({ username: "cody", password: "123" }),
     User.create({ username: "murphy", password: "123" }),
   ]);
+
+
+  for (let i = 0; i < 20; i++) {
+    await User.create({ username: randUserName(), password: "123" });
+  }
+
+
+=======
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded ${products.length} products`);

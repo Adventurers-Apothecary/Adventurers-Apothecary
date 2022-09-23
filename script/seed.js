@@ -4,10 +4,6 @@
 const { Sequelize } = require("sequelize");
 const { randUserName } = require("@ngneat/falso");
 
-=======
-"use strict";
-
-const { Sequelize } = require("sequelize");
 
 const {
   db,
@@ -119,16 +115,28 @@ async function seed() {
     User.create({ username: "murphy", password: "123" }),
   ]);
 
+  const carts = await Promise.all([
+    Cart.create({ isComplete: false, userId: 1 }),
+    Cart.create({ isComplete: false, userId: 2 }),
+    Cart.create({ isComplete: false }),
+    Cart.create({ isComplete: false }),
+  ]);
+
+  const cartProducts = await Promise.all([
+    Cart_Products.create({ quantity: 5, cartId: 1, productId: 3 }),
+    Cart_Products.create({ quantity: 7, cartId: 2, productId: 7 }),
+    Cart_Products.create({ quantity: 3, cartId: 4, productId: 2 }),
+  ])
 
   for (let i = 0; i < 20; i++) {
     await User.create({ username: randUserName(), password: "123" });
   }
 
 
-=======
-
   console.log(`seeded ${users.length} users`);
   console.log(`seeded ${products.length} products`);
+  console.log(`seeded ${carts.length} carts`);
+  console.log(`seeded ${cartProducts.length} cart products`)
   console.log(`seeded successfully`);
   return {
     users: {

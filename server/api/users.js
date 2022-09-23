@@ -19,16 +19,27 @@ router.get("/", requireToken, isAdmin, async (req, res, next) => {
   }
 });
 
+// how to protect this route so the signed in user can only access their cart?
+
 router.get("/:userId/cart", requireToken, async (req, res, next) => {
   try {
-    const userCart = await Cart.findOne({
-      where: {
-        userId: req.params.userId,
-        isComplete: false,
-      },
-    });
-    const userProducts = await userCart.getProducts();
-    res.send(userProducts);
+    const loggedInUserId = req.user.dataValues.id;
+    // await console.log(typeof loggedInUserId);
+    // await console.log(typeof req.params.userId);
+    // await console.log(loggedInUserId === Number(req.params.userId));
+    const userCheck = loggedInUserId === Number(req.params.userId);
+    if (userCheck) {
+      const userCart = await Cart.findOne({
+        where: {
+          userId: req.params.userId,
+          isComplete: false,
+        },
+      });
+      const userProducts = await userCart.getProducts();
+      res.send(userProducts);
+    } else {
+      res.send("forbidden");
+    }
   } catch (err) {
     next(err);
   }

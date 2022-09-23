@@ -116,8 +116,8 @@ async function seed() {
   ]);
 
   const carts = await Promise.all([
-    Cart.create({ isComplete: false, userId: 1 }),
-    Cart.create({ isComplete: false, userId: 2 }),
+    Cart.create({ isComplete: false }),
+    Cart.create({ isComplete: false }),
     Cart.create({ isComplete: false }),
     Cart.create({ isComplete: false })
   ]);

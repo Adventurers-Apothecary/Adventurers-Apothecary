@@ -24,9 +24,6 @@ router.get("/", requireToken, isAdmin, async (req, res, next) => {
 router.get("/:userId/cart", requireToken, async (req, res, next) => {
   try {
     const loggedInUserId = req.user.dataValues.id;
-    // await console.log(typeof loggedInUserId);
-    // await console.log(typeof req.params.userId);
-    // await console.log(loggedInUserId === Number(req.params.userId));
     const userCheck = loggedInUserId === Number(req.params.userId);
     if (userCheck) {
       const userCart = await Cart.findOne({
@@ -38,7 +35,7 @@ router.get("/:userId/cart", requireToken, async (req, res, next) => {
       const userProducts = await userCart.getProducts();
       res.send(userProducts);
     } else {
-      res.send("forbidden");
+      res.status(403).send("Forbidden.");
     }
   } catch (err) {
     next(err);

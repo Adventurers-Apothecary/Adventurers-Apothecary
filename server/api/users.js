@@ -2,7 +2,7 @@ const router = require("express").Router();
 const {
   models: { User, Cart },
 } = require("../db");
-const { requireToken, isAdmin } = require("./gatekeepingMiddleware");
+const { requireToken, isAdmin, authenticatedUser } = require("./gatekeepingMiddleware");
 module.exports = router;
 
 router.get("/", requireToken, isAdmin, async (req, res, next) => {
@@ -19,7 +19,7 @@ router.get("/", requireToken, isAdmin, async (req, res, next) => {
   }
 });
 
-router.get("/:userId/cart", requireToken, async (req, res, next) => {
+router.get("/:userId/cart", requireToken, authenticatedUser, async (req, res, next) => {
   try {
     const userCart = await Cart.findOne({
       where: {

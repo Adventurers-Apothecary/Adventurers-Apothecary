@@ -2,7 +2,7 @@ const router = require("express").Router();
 const {
   models: { User, Cart },
 } = require("../db");
-const { requireToken, isAdmin } = require("./gatekeepingMiddleware");
+const { requireToken, isAdmin, authenticatedUser} = require("./gatekeepingMiddleware");
 module.exports = router;
 
 router.get("/", requireToken, isAdmin, async (req, res, next) => {
@@ -19,13 +19,8 @@ router.get("/", requireToken, isAdmin, async (req, res, next) => {
   }
 });
 
-// how to protect this route so the signed in user can only access their cart?
-
-router.get("/:userId/cart", requireToken, async (req, res, next) => {
+router.get("/:userId/cart", requireToken, authenticatedUser, async (req, res, next) => {
   try {
-    const loggedInUserId = req.user.dataValues.id;
-    const userCheck = loggedInUserId === Number(req.params.userId);
-    if (userCheck) {
       const userCart = await Cart.findOne({
         where: {
           userId: req.params.userId,
@@ -34,9 +29,6 @@ router.get("/:userId/cart", requireToken, async (req, res, next) => {
       });
       const userProducts = await userCart.getProducts();
       res.send(userProducts);
-    } else {
-      res.status(403).send("Forbidden.");
-    }
   } catch (err) {
     next(err);
   }

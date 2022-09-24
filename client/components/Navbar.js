@@ -11,20 +11,22 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <Link to="/products">View All Products</Link>
-          <Link to="/orderhistory">Order History</Link>
-          <a href="#" onClick={handleClick}>
+          <Link to="/home" style={{ color: "inherit", textDecoration: "underline" }}>Home</Link>
+          <Link to="/products" style={{ color: "inherit", textDecoration: "underline" }}>View All Products</Link>
+          <Link to="/orderhistory" style={{ color: "inherit", textDecoration: "underline" }}>Order History</Link>
+          <Link to="/cart" style={{ color: "inherit", textDecoration: "underline" }}>View Cart</Link>
+          <a href="#" onClick={handleClick} style={{ color: "inherit", textDecoration: "underline" }}>
             Logout
           </a>
         </div>
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
-          <Link to="/home">Home</Link>
-          <Link to="/products">View All Products</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
+          <Link to="/home" style={{ color: "inherit", textDecoration: "underline" }}>Home</Link>
+          <Link to="/products" style={{ color: "inherit", textDecoration: "underline" }}>View All Products</Link>
+          <Link to="/cart" style={{ color: "inherit", textDecoration: "underline" }}>View Cart</Link>
+          <Link to="/login" style={{ color: "inherit", textDecoration: "underline" }}>Login</Link>
+          <Link to="/signup" style={{ color: "inherit", textDecoration: "underline" }}>Sign Up</Link>
         </div>
       )}
     </nav>

@@ -19,7 +19,35 @@ router.get("/", requireToken, isAdmin, async (req, res, next) => {
   }
 });
 
-router.get("/:userId/cart", requireToken, authenticatedUser, async (req, res, next) => {
+router.get('/:id', requireToken, (isAdmin || authenticatedUser), async(req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.id, {include: Cart});
+    res.json(user)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.put('/:id', requireToken, (isAdmin || authenticatedUser), async(req, res, next) =>{
+  try{
+    const user = await User.findByPk(req.params.id)
+    res.send(await user.update(req.body))
+  } catch (error){
+    next(error)
+  }
+})
+
+router.delete('/:id', requireToken, isAdmin, async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.id)
+    await user.destroy()
+    res.send(user)
+  } catch (error){
+    next(error)
+  }
+})
+
+router.get("/:userId/cart", async (req, res, next) => {
   try {
       const userCart = await Cart.findOne({
         where: {

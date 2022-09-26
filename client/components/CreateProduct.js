@@ -44,8 +44,8 @@ class CreateProduct extends Component {
                         <label htmlFor='price'>Price:</label>
                         <input name='price' onChange={handleChange} value={price} />
 
-                        <label htmlFor='price'>Price:</label>
-                        <input name='price' onChange={handleChange} value={price} />
+                        <label htmlFor='description'>Description:</label>
+                        <input name='description' onChange={handleChange} value={description} />
 
                         <button type="submit">Submit</button>
                     </div>

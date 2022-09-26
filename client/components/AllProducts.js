@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { fetchProducts } from "../store/products";
 import { Link } from "react-router-dom";
 import "./css/all-products.css";
+import CreateProduct from "./CreateProduct";
 
 export class AllProducts extends React.Component {
   componentDidMount() {
@@ -13,6 +14,7 @@ export class AllProducts extends React.Component {
     return (
       <main className="product-container">
         <h2>Products</h2>
+        <CreateProduct />
         <div className="products">
           {this.props.products.map((product) => (
             <div className="product" key={product.id}>

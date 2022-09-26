@@ -1,5 +1,5 @@
 import axios from 'axios'
-import history from '../history'
+
 
 const SET_PRODUCTS = "SET_PRODUCTS"
 const CREATE_PRODUCT = "CREATE_PRODUCT"
@@ -43,12 +43,12 @@ export const deleteProduct = (id) => {
 export default function productsReducer(products = [], action) {
     switch (action.type){
         case SET_PRODUCTS:
-            return action.products
+            return action.products;
         case CREATE_PRODUCT:
-            return [...products, action.product]
+            return [...products, action.product];
         case DELETE_PRODUCT:
-            return products.filter((product) => product.id !== action.product.id)
+            return products.filter((product) => product.id !== action.product.id);
         default:
-            return products
+            return products;
     }
 }

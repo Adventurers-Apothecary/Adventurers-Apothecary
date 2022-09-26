@@ -19,7 +19,7 @@ router.get("/", requireToken, isAdmin, async (req, res, next) => {
   }
 });
 
-router.get("/:userId/cart", requireToken, authenticatedUser, async (req, res, next) => {
+router.get("/:userId/cart", async (req, res, next) => {
   try {
       const userCart = await Cart.findOne({
         where: {
@@ -33,3 +33,5 @@ router.get("/:userId/cart", requireToken, authenticatedUser, async (req, res, ne
     next(err);
   }
 });
+
+// make sure to put back authenticatedUser and requireToken

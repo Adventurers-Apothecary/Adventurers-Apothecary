@@ -26,18 +26,18 @@ const isAdmin = (req, res, next) => {
   }
 };
 
-const authenticatedUser = (req, res, next) => {
-    const loggedInUserId = req.user.dataValues.id;
-    const userCheck = loggedInUserId === Number(req.params.userId);
-      if (!userCheck){
-        return res.status(403).send("Forbidden.");
-    } else {
-        next();
-    }
-};
+// const authenticatedUser = (req, res, next) => {
+//     const loggedInUserId = req.user.dataValues.id;
+//     const userCheck = loggedInUserId === Number(req.params.userId);
+//       if (!userCheck){
+//         return res.status(403).send("Forbidden.");
+//     } else {
+//         next();
+//     }
+// };
 
 module.exports = {
   requireToken,
   isAdmin,
-  authenticatedUser
+  // authenticatedUser
 };

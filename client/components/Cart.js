@@ -1,30 +1,50 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { fetchCart } from '../store/cart';
 
-class Cart extends React.Component {
+// or map through products to get the products?
+export class Cart extends React.Component {
+    componentDidMount() {
+        this.props.fetchCart();
+    }
+
     render() {
         return(
             <div className="cart-container">
                 <h2>Great things are waiting for you!</h2>
                 <ul className="cart">
-                    {this.props.products.map((product) => (
-                        <li className="cart-products" key={product.id}>
-                            <p>{product.name}</p>
-                            <p className="amount">
-                                {product.quantity * product.price}
+                    {this.props.cart.map((cart) => (
+                        <li className="cart-products" key={cart.id}>
+                            <p>{cart.productId.quantity}</p>
+                            <button className="update-quantity">+</button>
+                            <button className="update-quantity">-</button>
+                            <p className="total">
+                                Total: {cart.productId.quantity * cart.productId.price}
                             </p>
                         </li>
                     ))}
+                    <button className="checkout">Go To Checkout</button>
+                    {/* will need an onClick for this button to get to the checkout page */}
                 </ul>
             </div>
         )
     }
 }
 
+const mapState = ({ cart }) => {
+    return {
+        cart
+    };
+};
 
-// treating the cart as it's own array 
-// (in it's redux store)?  Maybe need to map?
+// may possibly need componentDidMount
+const mapDispatch = (dispatch, { history }) => {
+    return {
+        fetchCart: () => dispatch(fetchCart()),
+    };
+};
+
 
 // within this component: 
 // going to need the quantity of products(productId?) 
@@ -37,6 +57,5 @@ class Cart extends React.Component {
 // of items in cart 
 // kind of like View Cart (2) or figure out a cart symbol
 
-// what are we mapping for the state and then what would be dispatch?
 
-export default connect(mapState, null)(Cart)
+export default connect(mapState, mapDispatch)(Cart)

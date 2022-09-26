@@ -1,6 +1,12 @@
 import React, {Component} from 'react';
-import {createProduct} from '../store/products'
+import {createProduct, fetchProducts} from '../store/products'
 import {connect} from 'react-redux';
+
+const apiHeaders = {
+    headers: {
+      Authorization: localStorage.getItem("token"),
+    },
+  };
 
 class CreateProduct extends Component {
     constructor(){
@@ -23,7 +29,7 @@ class CreateProduct extends Component {
 
     handleSubmit(evt){
         evt.preventDefault()
-        this.props.createProduct({...this.state})
+        this.props.createProduct({...this.state}, apiHeaders)
     }
 
     render(){
@@ -55,8 +61,9 @@ class CreateProduct extends Component {
     }
 }
 
-const mapDispatchToProps = (dispatch, {history}) => ({
-    createProduct: (product) => dispatch(createProduct(product, history))
+const mapDispatchToProps = (dispatch, /*{history}*/) => ({
+    createProduct: (product, apiHeaders) => dispatch(createProduct(product,/* history,*/ apiHeaders)),
+    fetchProducts:() => dispatch(fetchProducts())
 })
 
 export default connect(null, mapDispatchToProps)(CreateProduct)

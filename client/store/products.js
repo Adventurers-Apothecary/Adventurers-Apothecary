@@ -25,11 +25,11 @@ export const fetchProducts = () => async (dispatch) => {
     dispatch(setProducts(data))
 }
 
-export const createProduct = (product, history) => {
+export const createProduct = (product, apiHeaders) => {
     return async (dispatch) => {
-        const {data: created} = await axios.post('api/products', product)
+        const {data: created} = await axios.post('api/products', product, apiHeaders)
         dispatch(_createProduct(created));
-        history.push('/')
+        // history.push('/')
     }
 }
 

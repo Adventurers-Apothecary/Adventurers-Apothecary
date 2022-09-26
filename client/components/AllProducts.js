@@ -5,6 +5,12 @@ import { Link } from "react-router-dom";
 import "./css/all-products.css";
 import CreateProduct from "./CreateProduct";
 
+const apiHeaders = {
+  headers: {
+    Authorization: localStorage.getItem("token"),
+  },
+};
+
 export class AllProducts extends React.Component {
   componentDidMount() {
     this.props.fetchProducts();
@@ -14,7 +20,7 @@ export class AllProducts extends React.Component {
     return (
       <main className="product-container">
         <h2>Products</h2>
-        <CreateProduct />
+        {this.props.isAdmin ? <CreateProduct /> : null}
         <div className="products">
           {this.props.products.map((product) => (
             <div className="product" key={product.id}>
@@ -31,15 +37,16 @@ export class AllProducts extends React.Component {
   }
 }
 
-const mapState = ({ products }) => {
+const mapState = (state) => {
   return {
-    products,
+    products: state.products,
+    isAdmin: !!state.auth.isAdmin,
   };
 };
 
 const mapDispatch = (dispatch, { history }) => {
   return {
-    fetchProducts: () => dispatch(fetchProducts()),
+    fetchProducts: () => dispatch(fetchProducts())
   };
 };
 

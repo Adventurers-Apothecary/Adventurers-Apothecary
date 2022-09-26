@@ -116,7 +116,7 @@ function SingleProduct(props) {
           <p>
             See more in this product's category: <span>{product.category}</span>
           </p>
-          <EditProduct />
+          <EditProduct productId={props.match.params.id}/>
         </div>
       )}
     </div>
@@ -130,6 +130,7 @@ const mapState = (state) => {
     cartProducts: state.cartProducts,
     singleCartProduct: state.singleCartProduct,
     isLoggedIn: !!state.auth.id,
+    isAdmin: !!state.auth.isAdmin,
   };
 };
 

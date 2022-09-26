@@ -17,8 +17,8 @@ class EditProduct extends Component {
     }
 
     componentDidMount(){
-        const {id} = this.props.match.params
-        this.props.fetchSingleProduct(id)
+        const id = this.props.productId;
+        this.props.fetchSingleProduct(id);
     }
 
     componentWillUnmount(){
@@ -45,7 +45,8 @@ class EditProduct extends Component {
 
     handleSubmit(evt){
         evt.preventDefault()
-        this.props.updateProduct({...this.props.product, ...this.state})
+        this.props.updateProduct({...this.props.product, ...this.state},
+            apiHeaders);
     }
 
     render(){
@@ -85,7 +86,7 @@ const mapStateToProps = ({product, auth, user}) => ({
 })
 
 const mapDispatchToProps = (dispatch, {history}) => ({
-    updateProduct: (product) => dispatch(updateProduct(product, history)),
+    updateProduct: (product) => dispatch(updateProduct(product, apiHeaders)),
     fetchSingleProduct: (id) => dispatch(fetchSingleProduct(id, history)),
     clearProduct: () => dispatch(setSingleProduct({}))
 })

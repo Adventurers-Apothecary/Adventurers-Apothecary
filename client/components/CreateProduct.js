@@ -15,7 +15,8 @@ class CreateProduct extends Component {
             name: '',
             imageUrl: '',
             price: 0,
-            description: ''
+            description: '',
+            category: ''
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -33,7 +34,7 @@ class CreateProduct extends Component {
     }
 
     render(){
-        const {name, imageUrl, price, description} = this.state
+        const {name, imageUrl, price, description, category} = this.state
         const {handleSubmit, handleChange} = this
 
         return (
@@ -53,6 +54,8 @@ class CreateProduct extends Component {
                         <label htmlFor='description'>Description:</label>
                         <input name='description' onChange={handleChange} value={description} />
 
+                        <label htmlFor='category'>Category:</label>
+                        <input name='category' onChange={handleChange} value={category} />
                         <button type="submit">Submit</button>
                     </div>
                 </form>

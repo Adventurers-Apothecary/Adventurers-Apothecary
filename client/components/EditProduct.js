@@ -9,7 +9,8 @@ class EditProduct extends Component {
             name: '',
             imageUrl: '',
             price: 0,
-            description: ''
+            description: '',
+            category: ''
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -30,7 +31,8 @@ class EditProduct extends Component {
                 name: this.props.product.name || '',
                 imageUrl: this.props.product.address || '',
                 price: this.props.product.price || 0,
-                description: this.props.product.description || ''
+                description: this.props.product.description || '',
+                category: this.props.product.description || ''
             })
         }
     }
@@ -47,7 +49,7 @@ class EditProduct extends Component {
     }
 
     render(){
-        const {name, imageUrl, price, description} = this.state;
+        const {name, imageUrl, price, description, category} = this.state;
         const {handleSubmit, handleChange} = this;
         console.log(this.props)
         return (
@@ -65,6 +67,11 @@ class EditProduct extends Component {
 
                     <label htmlFor='description'>Description:</label>
                     <input name='description' onChange={handleChange} value={description} />
+
+                    <label htmlFor='category'>Category:</label>
+                    <input name='category' onChange={handleChange} value={category} />
+
+                    <button type="submit">Submit</button>
                 </form>
             </div>
         )

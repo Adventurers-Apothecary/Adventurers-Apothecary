@@ -28,12 +28,12 @@
   border-radius: 10px;
   max-width: 280px;
   max-height: 250px;
-  width: auto;
+  /* width: auto;
   height: auto;
-  object-fit: contain;
+  object-fit: contain; */
   /* another for tackling resizing images */
-  /* min-height: 250px;
+  min-height: 250px;
   min-width: 280px;
   object-fit: cover;
-  object-position: left bottom; */
+  /* object-position: top; */
 }

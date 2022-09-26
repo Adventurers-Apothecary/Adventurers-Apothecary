@@ -34,4 +34,4 @@ router.get("/:userId/cart", async (req, res, next) => {
   }
 });
 
-// make sure to put back authenticatedUser and requireToken
+// make sure to put back authenticatedUser and requireToken once that is figured out

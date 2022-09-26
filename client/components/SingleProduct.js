@@ -18,7 +18,6 @@ import EditQuantity from "./EditQuantity";
 import axios from "axios";
 
 function SingleProduct(props) {
- 
   const { id } = useParams();
   const product = props.singleProduct;
   const [quantityCount, setQuantity] = useState(1);
@@ -29,7 +28,6 @@ function SingleProduct(props) {
       Authorization: localStorage.getItem("token"),
     },
   };
-
 
   useEffect(() => {
     props.getSingleProduct(id);
@@ -116,7 +114,7 @@ function SingleProduct(props) {
           <p>
             See more in this product's category: <span>{product.category}</span>
           </p>
-          <EditProduct />
+          <EditProduct productId={props.match.params.id} />
         </div>
       )}
     </div>

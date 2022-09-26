@@ -14,8 +14,8 @@ export const setSingleProduct = (product) => {
 
 const _updateProduct = (product) => ({
   type: UPDATE_PRODUCT,
-  product
-})
+  product,
+});
 
 // thunk creator:
 export const fetchSingleProduct = (productId) => {
@@ -29,12 +29,16 @@ export const fetchSingleProduct = (productId) => {
   };
 };
 
-export const updateProduct = (product) => {
+export const updateProduct = (product, apiHeaders) => {
   return async (dispatch) => {
-    const {data: updated} = await axios.put(`/api/products/${product.id}`, product)
-    dispatch(_updateProduct(updated))
-  }
-}
+    const { data: updated } = await axios.put(
+      `/api/products/${product.id}`,
+      product,
+      apiHeaders
+    );
+    dispatch(_updateProduct(updated));
+  };
+};
 
 // reducer:
 export default function singleProductReducer(product = {}, action) {

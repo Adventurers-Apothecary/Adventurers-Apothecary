@@ -23,8 +23,6 @@ const deleteProduct = (product) => ({
     // should this be productId or quantity?
 })
 
-// my thought process is when they click on View Cart it will fetch that users cart 
-// with their specifed products and quantity
 export const fetchCart = (userId) => {
     return async (dispatch) => {
         const { data } = await axios.get(`/api/users/${userId}/cart`);

@@ -21,3 +21,27 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+/* .cart-container {
+  display: flex;
+  flex-direction: row;
+} */
+
+/* .cart-products {
+  padding: 10px;
+  margin: 10px;
+  background-color: rgb(232, 231, 231);
+  border-radius: 5px;
+  min-width: 300px;
+  max-height: 400px;
+  max-width: 300px;
+}
+
+.cart-product-image {
+  align-self: center;
+  border-radius: 10px;
+  max-width: 280px;
+  max-height: 250px;
+  width: auto;
+  height: auto;
+} */

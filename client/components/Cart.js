@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 import { fetchCart } from '../store/cart';
 import { me } from '../store/auth';
 
-// or map through products to get the products?
-
 export class Cart extends React.Component {
     constructor(props) {
         super(props)
@@ -14,19 +12,19 @@ export class Cart extends React.Component {
 
     async componentDidMount() {
         await this.props.me()
-        // console.log(this.props);
         await this.props.fetchCart(this.props.auth.id);
         
     }
 
     render() {
         return(
-            <div className="cart-container">
+            <div className="cart">
                 <h2>Great things are waiting for you!</h2>
-                <div className="cart">
+                <div className="cart-container">
                     {this.props.cart.map((cart) => (
                         <div className="cart-products" key={cart.id}>
                             <p>{cart.name}</p>
+                            <img id="cart-product-image" src={cart.imageUrl} alt="product-image"/>
                             <p>Quantity: {cart.cart_products.quantity}</p>
                             <button className="update-quantity">+</button>
                             <button className="update-quantity">-</button>
@@ -35,22 +33,13 @@ export class Cart extends React.Component {
                             </p>
                         </div>
                     ))}
-                    <button className="checkout">Go To Checkout</button>
-                    {/* will need an onClick for this button to get to the checkout page */}
                 </div>
+                <button className="checkout">Proceed To Checkout</button>
+                    {/* will need an onClick for this button to get to the checkout page */}
             </div>
         )
     }
 }
-
-
-// {this.props.cart[0] && this.props.cart[0].cart_products.map((cart) =>
-// throught process:
-    // mapping through the cart to and 
-    // map the cart_products (to get the quantity, cartId)
-
-    // added the checkout button, so will need an onClick for 
-    // that to go to the checkout page
 
     // also need to figure out how to show the current number 
     // of items in cart 

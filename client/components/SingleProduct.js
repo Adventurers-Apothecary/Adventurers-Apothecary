@@ -87,6 +87,7 @@ function SingleProduct(props) {
             className="single-product-img"
           />
           <p>{product.description}</p>
+          {!props.isLoggedIn && <p>For now: please log in to shop.</p>}
           {props.cartProducts &&
           props.isLoggedIn &&
           props.cartProducts.map((elem) => elem.id).includes(+id) ? (

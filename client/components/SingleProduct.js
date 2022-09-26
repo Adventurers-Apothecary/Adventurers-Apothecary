@@ -8,34 +8,53 @@ import {
   setSingleProduct,
 } from "../store/redux/singleProduct";
 
+import { fetchCartProducts } from "../store/redux/cartProducts";
+
+import { fetchCartProduct } from "../store/redux/singleCartProduct";
+
+import EditQuantity from "./EditQuantity";
+
 import axios from "axios";
 
 function SingleProduct(props) {
   const { id } = useParams();
   const product = props.singleProduct;
   const [quantityCount, setQuantity] = useState(1);
+  const userId = props.auth.id;
+
+  const apiHeaders = {
+    headers: {
+      Authorization: localStorage.getItem("token"),
+    },
+  };
 
   useEffect(() => {
     props.getSingleProduct(id);
+    if (userId) {
+      props.getCartProducts(userId, apiHeaders);
+      props.getCartProduct(userId, id, apiHeaders);
+    }
     return () => {
       props.clearSingleProduct();
     };
-  }, []);
+  }, [props.auth, userId]);
 
   // post request test:
-  const handleAdd = useCallback(async (evt) => {
-    evt.preventDefault();
-    await axios.post("/api/users/:userId/cart", {
-      quantity: quantityCount,
-      productId: id,
-    });
-  }, []);
-
-  const handleQuantityChange = useCallback(
+  const handleAdd = useCallback(
     async (evt) => {
-      await setQuantity(evt.target.value), console.log(quantityCount);
+      evt.preventDefault();
+      await axios.post(
+        `/api/users/${userId}/cart`,
+        {
+          quantity: quantityCount,
+          productId: id,
+        },
+        apiHeaders
+      );
+      await props.getCartProducts(userId, apiHeaders);
+      await props.getCartProduct(userId, id, apiHeaders);
     },
-    [quantityCount]
+    [props.auth, quantityCount]
   );
 
   const increaseQuantity = useCallback(
@@ -69,16 +88,23 @@ function SingleProduct(props) {
           />
           <p>{product.description}</p>
 
-          <form onSubmit={handleAdd}>
-            <span>
-              <button onClick={increaseQuantity}>+</button>
-              <label htmlFor="quantityCount">Quantity: {quantityCount}</label>
-              <button onClick={decreaseQuantity}>-</button>
-            </span>
-            <p>
-              <button type="submit">Add To Cart</button>
-            </p>
-          </form>
+          {props.cartProducts &&
+          props.cartProducts.map((elem) => elem.id).includes(+id) ? (
+            <div>
+              <EditQuantity quant={props.singleCartProduct.quantity} />
+            </div>
+          ) : (
+            <form onSubmit={handleAdd}>
+              <span>
+                <button onClick={increaseQuantity}>+</button>
+                <label htmlFor="quantityCount">Quantity: {quantityCount}</label>
+                <button onClick={decreaseQuantity}>-</button>
+              </span>
+              <p>
+                <button type="submit">Add To Cart</button>
+              </p>
+            </form>
+          )}
           <p>
             See more in this product's category: <span>{product.category}</span>
           </p>
@@ -91,6 +117,9 @@ function SingleProduct(props) {
 const mapState = (state) => {
   return {
     singleProduct: state.product,
+    auth: state.auth,
+    cartProducts: state.cartProducts,
+    singleCartProduct: state.singleCartProduct,
   };
 };
 
@@ -98,6 +127,10 @@ const mapDispatch = (dispatch) => {
   return {
     getSingleProduct: (productId) => dispatch(fetchSingleProduct(productId)),
     clearSingleProduct: () => dispatch(setSingleProduct({})),
+    getCartProducts: (userId, apiHeaders) =>
+      dispatch(fetchCartProducts(userId, apiHeaders)),
+    getCartProduct: (userId, productId, apiHeaders) =>
+      dispatch(fetchCartProduct(userId, productId, apiHeaders)),
   };
 };
 

@@ -29,6 +29,7 @@ function EditQuantity(props) {
     return () => {};
   }, [props.quant]);
 
+  // put request test, should be integrated into redux files:
   const handleUpdate = useCallback(
     async (evt) => {
       evt.preventDefault();

@@ -30,7 +30,7 @@ function SingleProduct(props) {
 
   useEffect(() => {
     props.getSingleProduct(id);
-    if (userId) {
+    if (props.auth.id) {
       props.getCartProducts(userId, apiHeaders);
       props.getCartProduct(userId, id, apiHeaders);
     }

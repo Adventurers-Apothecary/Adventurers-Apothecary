@@ -5,7 +5,7 @@ const {
 const { requireToken, isAdmin, authenticatedUser} = require("./gatekeepingMiddleware");
 module.exports = router;
 
-router.get("/", requireToken, isAdmin, async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     const users = await User.findAll({
       // explicitly select only the id and username fields - even though
@@ -19,7 +19,7 @@ router.get("/", requireToken, isAdmin, async (req, res, next) => {
   }
 });
 
-router.get('/:id', requireToken, (isAdmin || authenticatedUser), async(req, res, next) => {
+router.get('/:id', async(req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id, {include: Cart});
     res.json(user)
@@ -28,7 +28,7 @@ router.get('/:id', requireToken, (isAdmin || authenticatedUser), async(req, res,
   }
 })
 
-router.put('/:id', requireToken, (isAdmin || authenticatedUser), async(req, res, next) =>{
+router.put('/:id', async(req, res, next) =>{
   try{
     const user = await User.findByPk(req.params.id)
     res.send(await user.update(req.body))
@@ -37,7 +37,7 @@ router.put('/:id', requireToken, (isAdmin || authenticatedUser), async(req, res,
   }
 })
 
-router.delete('/:id', requireToken, isAdmin, async (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id)
     await user.destroy()

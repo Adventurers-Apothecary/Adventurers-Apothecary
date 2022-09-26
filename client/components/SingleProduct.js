@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import { connect} from "react-redux";
 import { useParams } from "react-router-dom";
 import "./css/single-product.css";
 
@@ -7,10 +7,13 @@ import {
   fetchSingleProduct,
   setSingleProduct,
 } from "../store/redux/singleProduct";
+import EditProduct from "./EditProduct";
 
 function SingleProduct(props) {
+ 
   const { id } = useParams();
   const product = props.singleProduct;
+
 
   useEffect(() => {
     props.getSingleProduct(id);
@@ -34,6 +37,7 @@ function SingleProduct(props) {
           <p>
             See more in this product's category: <span>{product.category}</span>
           </p>
+          <EditProduct />
         </div>
       )}
     </div>

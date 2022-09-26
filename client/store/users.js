@@ -24,7 +24,7 @@ export const fetchUsers = () => async(dispatch) => {
 
 export const deleteUser = (id) => {
     return async (dispatch) => {
-        const {data: user} = await axios.delete(`api/students${id}`);
+        const {data: user} = await axios.delete(`api/users/${id}`);
         dispatch(_deleteUser(user));
     };
 };

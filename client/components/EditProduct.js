@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {fetchSingleProduct, setSingleProduct, updateProduct} from '../store/redux/singleProduct';
-import {connect} from 'react-redux';
+import {connect, useDispatch} from 'react-redux';
 
 class EditProduct extends Component {
     constructor(props){
@@ -49,7 +49,7 @@ class EditProduct extends Component {
     render(){
         const {name, imageUrl, price, description} = this.state;
         const {handleSubmit, handleChange} = this;
-
+        console.log(this.props)
         return (
             <div>
                 <h3>Edit Product</h3>
@@ -71,8 +71,10 @@ class EditProduct extends Component {
     }
 }
 
-const mapStateToProps = ({product}) => ({
-    product
+const mapStateToProps = ({product, auth, user}) => ({
+    product,
+    auth,
+    user
 })
 
 const mapDispatchToProps = (dispatch, {history}) => ({

@@ -23,8 +23,6 @@ router.get("/", requireToken, isAdmin, async (req, res, next) => {
   }
 });
 
-// how to protect this route so the signed in user can only access their cart?
-
 router.get(
   "/:userId/cart",
   requireToken,

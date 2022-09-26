@@ -8,6 +8,7 @@ const {
 
 const requireToken = async (req, res, next) => {
   try {
+    console.log("requireToken");
     const token = req.headers.authorization;
     const user = await User.findByToken(token);
     req.user = user;

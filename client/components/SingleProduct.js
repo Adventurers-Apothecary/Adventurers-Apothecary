@@ -116,7 +116,7 @@ function SingleProduct(props) {
           <p>
             See more in this product's category: <span>{product.category}</span>
           </p>
-          <EditProduct productId={props.match.params.id}/>
+          {props.isAdmin ? <EditProduct productId={props.match.params.id}/> : null}
         </div>
       )}
     </div>

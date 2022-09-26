@@ -2,6 +2,12 @@ import React, {Component} from 'react';
 import {fetchSingleProduct, setSingleProduct, updateProduct} from '../store/redux/singleProduct';
 import {connect, useDispatch} from 'react-redux';
 
+const apiHeaders = {
+    headers: {
+      Authorization: localStorage.getItem("token"),
+    },
+  };
+
 class EditProduct extends Component {
     constructor(props){
         super(props)

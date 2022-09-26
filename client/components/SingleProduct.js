@@ -39,7 +39,7 @@ function SingleProduct(props) {
     };
   }, [props.auth, userId]);
 
-  // post request test:
+  // post request test, should be integrated into redux files:
   const handleAdd = useCallback(
     async (evt) => {
       evt.preventDefault();
@@ -87,23 +87,27 @@ function SingleProduct(props) {
             className="single-product-img"
           />
           <p>{product.description}</p>
-
           {props.cartProducts &&
+          props.isLoggedIn &&
           props.cartProducts.map((elem) => elem.id).includes(+id) ? (
             <div>
               <EditQuantity quant={props.singleCartProduct.quantity} />
             </div>
           ) : (
-            <form onSubmit={handleAdd}>
-              <span>
-                <button onClick={increaseQuantity}>+</button>
-                <label htmlFor="quantityCount">Quantity: {quantityCount}</label>
-                <button onClick={decreaseQuantity}>-</button>
-              </span>
-              <p>
-                <button type="submit">Add To Cart</button>
-              </p>
-            </form>
+            props.isLoggedIn && (
+              <form onSubmit={handleAdd}>
+                <span>
+                  <button onClick={increaseQuantity}>+</button>
+                  <label htmlFor="quantityCount">
+                    Quantity: {quantityCount}
+                  </label>
+                  <button onClick={decreaseQuantity}>-</button>
+                </span>
+                <p>
+                  <button type="submit">Add To Cart</button>
+                </p>
+              </form>
+            )
           )}
           <p>
             See more in this product's category: <span>{product.category}</span>
@@ -120,6 +124,7 @@ const mapState = (state) => {
     auth: state.auth,
     cartProducts: state.cartProducts,
     singleCartProduct: state.singleCartProduct,
+    isLoggedIn: !!state.auth.id,
   };
 };
 

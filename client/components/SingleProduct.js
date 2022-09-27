@@ -49,6 +49,11 @@ function SingleProduct(props) {
   // post request test, should be integrated into redux files:
   const handleAdd = useCallback(
     async (evt) => {
+      apiHeaders = {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      };
       evt.preventDefault();
       await axios.post(
         `/api/users/${userId}/cart`,

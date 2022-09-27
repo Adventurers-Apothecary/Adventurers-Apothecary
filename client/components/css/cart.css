@@ -16,22 +16,22 @@
 .cart-product {
   padding: 10px;
   margin: 10px;
-  background-color: rgb(232, 231, 231);
+  background-color: #fffae8;
   border-radius: 5px;
   min-width: 300px;
-  /* min-height: 450px; */
   max-height: 430px;
   max-width: 300px;
 }
 
 .cart-product-img {
   align-self: center;
-  border-radius: 10px;
   max-width: 280px;
   max-height: 250px;
   min-height: 250px;
   min-width: 280px;
   object-fit: cover;
+  border-style: solid;
+  border-color: #815a7d;
 }
 
 .cart-quantity-container {

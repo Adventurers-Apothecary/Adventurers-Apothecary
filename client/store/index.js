@@ -6,17 +6,18 @@ import auth from "./auth";
 import productsReducer from "./products";
 import singleProductReducer from "./redux/singleProduct";
 import cartReducer from "./cart";
-import cartProductsReducer from "./redux/cartProducts";
-import singleCartProductReducer from "./redux/singleCartProduct";
+// import cartProductsReducer from "./redux/cartProducts";
+// import singleCartProductReducer from "./redux/singleCartProduct";
 
 const reducer = combineReducers({
   auth,
   products: productsReducer,
   product: singleProductReducer,
   cart: cartReducer,
-  cartProducts: cartProductsReducer,
-  singleCartProduct: singleCartProductReducer,
+  // cartProducts: cartProductsReducer,
+  // singleCartProduct: singleCartProductReducer,
 });
+
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );

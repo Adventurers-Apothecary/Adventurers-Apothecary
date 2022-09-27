@@ -11,60 +11,57 @@ const setCart = (cart) => ({
     cart
 });
 
-const editQuantity = (product) => ({
+const editQuantity = (quantity) => ({
     type: UPDATE_QUANTITY,
-    product
+    productId
     // or should this be productId, or quantity?
 });
 
-const deleteProduct = (product) => ({
+const deleteProduct = (productId) => ({
     type: DELETE_ITEM,
-    product,
-    // should this be productId or quantity?
+    productId
+    // should this be productId?
 })
 
-export const fetchCart = (userId) => {
+export const fetchCart = (userId, apiHeaders) => {
     return async (dispatch) => {
-        const { data } = await axios.get(`/api/users/${userId}/cart`);
+        const { data } = await axios.get(`/api/users/${userId}/cart`, apiHeaders);
         dispatch(setCart(data));
     }
 }
 
-export const increaseQuantity = (productId) => {
+export const increaseQuantity = (userId, quantity, apiHeaders) => {
     return async (dispatch) => {
-        const { data } = await axios.put(`/:userId/cart/${productId}/increase`);
+        const { data } = await axios.put(`/api/users/${userId}/cart/${productId}/increase`, apiHeaders);
         dispatch(editQuantity(data));
-        // or should it be looking at it the productId?
-        
+       
     }
 }
 
-export const decreaseQuantity = (productId) => {
+export const decreaseQuantity = (userId, quantity, apiHeaders) => {
     return async (dispatch) => {
-        const { data } = await axios.put(`/:userId/cart/${productId}/decrease`);
+        const { data } = await axios.put(`/api/users/${userId}/cart/${productId}/decrease`, apiHeaders);
         dispatch(editQuantity(data));
     }
 }
 
-export const deleteItem = (productId, history) => {
+export const deleteItem = (userId, productId, history, apiHeaders) => {
     return async (dispatch) => {
-        const { data } = await axios.delete(`/:userId/cart/${productId}`); 
-        // or should this be productId?
+        const { data } = await axios.delete(`/api/users/${userId}/cart/${productId}`, apiHeaders); 
         dispatch(deleteProduct(data));
         history.push('/cart');
     }
 }
 
-
-export default function cartReducer(cart = [], action) {
+export default function cartReducer(cart = [], action) { 
     switch(action.type) {
         case SET_CART:
             return action.cart
-        // case UPDATE_QUANTITY:
-            // return {...cart, cart_products: action.quantity}
-        // case DELETE_ITEM:
-        //     return cart.filter((product) => product.id !== action.product.id)
-            // case for deleting/removing from cart
+        case UPDATE_QUANTITY:
+            return cart.map((cart) => cart.id === action.cart.id ? action.cart : cart)
+        case DELETE_ITEM:
+            return cart.filter((cart) => cart.cart_products.productId !== action.cart.cart_products.productId)
+            // return cart.filter((cart) => cart.id !== action.cart.id)
         // case PROCEED_TO_CHECKOUT:
         //     // case for getting to checkout page
         default:

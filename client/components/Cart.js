@@ -1,14 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchCart } from '../store/cart';
+import { fetchCart, deleteItem, increaseQuantity, decreaseQuantity} from '../store/cart';
 import { me } from '../store/auth';
+
+const apiHeaders = {
+    headers: {
+        Authorization: localStorage.getItem("token")
+    }
+}
 
 export class Cart extends React.Component {
     constructor(props) {
         super(props)
-
     }
+
 
     async componentDidMount() {
         await this.props.me()
@@ -25,9 +31,34 @@ export class Cart extends React.Component {
                         <div className="cart-products" key={cart.id}>
                             <p>{cart.name}</p>
                             <img id="cart-product-image" src={cart.imageUrl} alt="product-image"/>
+
+                            <form onSubmit={(evt) => evt.preventDefault()}>
+                            {/* // onClick={this.props.increaseQuantity(this.props.match.params.productId)} */}
+                                <button className="update-quantity">
+                                    +
+                                </button> 
+                            </form>
+
                             <p>Quantity: {cart.cart_products.quantity}</p>
-                            <button className="update-quantity">+</button>
-                            <button className="update-quantity">-</button>
+
+                            <form>
+                            {/* // onClick={this.props.increaseQuantity(this.props.match.params.productId)} */}
+                                <button className="update-quantity">
+                                    -
+                                </button>
+                            </form>
+
+                            <br/>
+
+                            <form onSubmit={(evt) => evt.preventDefault()}>
+                                <button 
+                                className="delete-product"
+                                onClick={() => this.props.deleteItem(cart.cart_products.productId)}
+                                >
+                                    Delete from Cart
+                                </button>
+                            </form>
+
                             <p className="total">
                                 Total: {cart.cart_products.quantity * cart.cart_products.price}
                             </p>
@@ -41,10 +72,6 @@ export class Cart extends React.Component {
     }
 }
 
-    // also need to figure out how to show the current number 
-    // of items in cart 
-    // kind of like View Cart (2) or figure out a cart symbol
-
 const mapState = (state) => {
     return {
         cart: state.cart,
@@ -55,7 +82,9 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch, { history }) => {
     return {
-        fetchCart: (userId) => dispatch(fetchCart(userId)),
+        fetchCart: (userId) => dispatch(fetchCart(userId, apiHeaders)),
+        updateQuantity: (userId, productId) => dispatch(updateQuantity(userId, productId, apiHeaders)),
+        deleteItem: (userId, productId) => dispatch(deleteItem(userId, productId, history, apiHeaders)),
         me: () => dispatch(me()),
     };
 };
@@ -63,3 +92,5 @@ const mapDispatch = (dispatch, { history }) => {
 
 
 export default connect(mapState, mapDispatch)(Cart)
+
+// // onClick={this.props.increaseQuantity(this.props.match.params.productId)}

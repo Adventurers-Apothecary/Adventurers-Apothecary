@@ -18,13 +18,14 @@ function EditQuantity(props) {
   const { id } = useParams();
   const userId = props.auth.id;
   const [quantityCount, setQuantity] = useState(1);
-  const apiHeaders = {
-    headers: {
-      Authorization: localStorage.getItem("token"),
-    },
-  };
+  let apiHeaders = {};
 
   useEffect(() => {
+    // apiHeaders = {
+    //   headers: {
+    //     Authorization: localStorage.getItem("token"),
+    //   },
+    // };
     setQuantity(props.quant);
     return () => {};
   }, [props.quant]);
@@ -32,6 +33,11 @@ function EditQuantity(props) {
   // put request test, should be integrated into redux files:
   const handleUpdate = useCallback(
     async (evt) => {
+      apiHeaders = {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      };
       evt.preventDefault();
       await axios.put(
         `/api/users/${userId}/cart/${id}`,
@@ -46,6 +52,11 @@ function EditQuantity(props) {
 
   const handleDelete = useCallback(
     async (evt) => {
+      apiHeaders = {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      };
       evt.preventDefault();
       await axios.delete(`/api/users/${userId}/cart/${id}`, apiHeaders);
       await props.getCartProducts(userId, apiHeaders);

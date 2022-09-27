@@ -28,7 +28,7 @@ export class AllProducts extends React.Component {
                 <Link to={`/products/${product.id}`}>{product.name}</Link>
               </h2>
               <img className="product-img" src={product.imageUrl} />
-              <p>{product.price}</p>
+              <p>${(Math.round(product.price) / 100).toFixed(2)}</p>
             </div>
           ))}
         </div>
@@ -46,7 +46,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch, { history }) => {
   return {
-    fetchProducts: () => dispatch(fetchProducts())
+    fetchProducts: () => dispatch(fetchProducts()),
   };
 };
 

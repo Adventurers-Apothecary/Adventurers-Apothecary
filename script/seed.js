@@ -1,9 +1,7 @@
-
-'use strict'
+"use strict";
 
 const { Sequelize } = require("sequelize");
 const { randUserName } = require("@ngneat/falso");
-
 
 const {
   db,
@@ -22,7 +20,7 @@ async function seed() {
   const products = await Promise.all([
     Product.create({
       name: "Chamomile",
-      price: 3.0,
+      price: 3.5,
       category: "seeds",
       imageUrl:
         "https://images.squarespace-cdn.com/content/v1/55674e06e4b0830d6f6d4322/1434731100813-B54G5WATAWUENQNZ87W9/german+chamomile.jpg",
@@ -111,7 +109,7 @@ async function seed() {
 
   // Creating Users
   const users = await Promise.all([
-    User.create({ username: "cody", password: "123" }),
+    User.create({ username: "cody", password: "123", isAdmin: true }),
     User.create({ username: "murphy", password: "123" }),
   ]);
 
@@ -123,20 +121,19 @@ async function seed() {
   ]);
 
   const cartProducts = await Promise.all([
-    Cart_Products.create({ quantity: 5, cartId: 1, productId: 3 }),
-    Cart_Products.create({ quantity: 7, cartId: 2, productId: 7 }),
-    Cart_Products.create({ quantity: 3, cartId: 4, productId: 2 }),
-  ])
+    Cart_Products.create({ quantity: 5, price: 3, cartId: 1, productId: 3 }),
+    Cart_Products.create({ quantity: 7, price: 15, cartId: 2, productId: 7 }),
+    Cart_Products.create({ quantity: 3, price: 3, cartId: 4, productId: 2 }),
+  ]);
 
   for (let i = 0; i < 20; i++) {
     await User.create({ username: randUserName(), password: "123" });
   }
 
-
   console.log(`seeded ${users.length} users`);
   console.log(`seeded ${products.length} products`);
   console.log(`seeded ${carts.length} carts`);
-  console.log(`seeded ${cartProducts.length} cart products`)
+  console.log(`seeded ${cartProducts.length} cart products`);
   console.log(`seeded successfully`);
   return {
     users: {

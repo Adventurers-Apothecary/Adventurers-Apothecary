@@ -44,10 +44,12 @@ function SingleProduct(props) {
   const handleAdd = useCallback(
     async (evt) => {
       evt.preventDefault();
+      const productPrice = props.singleProduct.price;
       await axios.post(
         `/api/users/${userId}/cart`,
         {
           quantity: quantityCount,
+          price: productPrice,
           productId: id,
         },
         apiHeaders
@@ -81,7 +83,7 @@ function SingleProduct(props) {
       {product && (
         <div className="product-view">
           <h2>{product.name}</h2>
-          <h3>Price: ${product.price}</h3>
+          <h3>Price: ${(Math.round(product.price) / 100).toFixed(2)}</h3>
           <img
             src={product.imageUrl}
             alt="image"

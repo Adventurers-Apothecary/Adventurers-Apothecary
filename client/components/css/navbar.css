@@ -9,3 +9,9 @@ nav {
   background-color: #a485a1;
   border-radius: 0px 0px 5px 5px;
 }
+
+.brand_image {
+  width: 25%;
+  margin: 2rem;
+  border-radius:0px 0px 5px 5px;
+}

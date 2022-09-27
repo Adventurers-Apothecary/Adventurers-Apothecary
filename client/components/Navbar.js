@@ -7,8 +7,7 @@ import "./css/navbar.css";
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div className="full-nav">
-    <h1>Adventurer's Apothecary</h1>
-    <h2>Feed your apothecarium side!</h2>
+    <img className="brand-image" src="https://live.staticflickr.com/65535/52388139047_674b5e1fe8_b.jpg" alt="Adventurer's Apothecary logo"/>
     <nav className="nav-container">
       {isLoggedIn ? (
         <div>
@@ -39,7 +38,6 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
             <span>My Cart</span>
             
           </Link>
-          {/* <Link to="/cart" style={{ color: "inherit", textDecoration: "underline"}}><i className="material-icons"></i></Link> */}
           <a
             href="#"
             onClick={handleClick}

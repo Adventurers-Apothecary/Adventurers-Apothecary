@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import {
   fetchCart,
   deleteItem,
-  increaseQuantity,
-  decreaseQuantity,
+//   increaseQuantity,
+//   decreaseQuantity,
   setCart,
   updateProduct,
 } from "../store/cart";

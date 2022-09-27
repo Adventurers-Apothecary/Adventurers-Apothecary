@@ -6,10 +6,7 @@ import SingleProduct from "./components/SingleProduct";
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import Cart from "./components/Cart";
-<<<<<<< HEAD
-=======
 // don't forget to import Checkout from components
->>>>>>> main
 import { me } from "./store";
 import AllUsers from "./components/AllUsers";
 import User from "./components/User";

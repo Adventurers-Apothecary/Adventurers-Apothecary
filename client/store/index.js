@@ -13,8 +13,8 @@ import singleCartProductReducer from "./redux/singleCartProduct";
 
 const reducer = combineReducers({
   auth,
-  users: usersReducer,
-  user: userReducer,
+  // users: usersReducer,
+  // user: userReducer,
   products: productsReducer,
   product: singleProductReducer,
   cart: cartReducer,

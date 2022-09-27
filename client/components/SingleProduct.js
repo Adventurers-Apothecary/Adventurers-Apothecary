@@ -56,12 +56,12 @@ function SingleProduct(props) {
         },
       };
       evt.preventDefault();
-      const productPrice = props.singleProduct.price;
+      // const productPrice = props.singleProduct.price;
       await axios.post(
         `/api/users/${userId}/cart`,
         {
           quantity: quantityCount,
-          price: productPrice,
+          // price: productPrice,
           productId: id,
         },
         apiHeaders

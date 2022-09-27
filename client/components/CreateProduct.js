@@ -34,14 +34,15 @@ class CreateProduct extends Component {
     });
   }
 
-  handleSubmit(evt) {
+  async handleSubmit(evt) {
     apiHeaders = {
       headers: {
         Authorization: localStorage.getItem("token"),
       },
     };
     evt.preventDefault();
-    this.props.createProduct({ ...this.state }, apiHeaders);
+    await this.props.createProduct({ ...this.state }, apiHeaders);
+    await this.props.fetchProducts();
   }
 
   render() {

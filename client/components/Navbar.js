@@ -6,8 +6,7 @@ import "./css/navbar.css";
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div className="full-nav">
-    <h1>Adventurer's Apothecary</h1>
-    <h2>Feed your apothecarium side!</h2>
+    <img className="brand-image" src="https://live.staticflickr.com/65535/52388937361_c88c35ae45_b.jpg" alt="Adventurer's Apothecary logo"/>
     <nav className="nav-container">
       {isLoggedIn ? (
         <div>

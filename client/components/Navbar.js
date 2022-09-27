@@ -36,7 +36,6 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           >
             My Cart
           </Link>
-          {/* <Link to="/cart" style={{ color: "inherit", textDecoration: "underline"}}><i className="material-icons"></i></Link> */}
           <a
             href="#"
             onClick={handleClick}

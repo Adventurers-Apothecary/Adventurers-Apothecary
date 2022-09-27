@@ -4,6 +4,7 @@ import axios from "axios";
 const SET_SINGLE_PRODUCT = "SET_SINGLE_PRODUCT";
 const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 
+
 // action creator:
 export const setSingleProduct = (product) => {
   return {
@@ -12,10 +13,13 @@ export const setSingleProduct = (product) => {
   };
 };
 
+<<<<<<< HEAD
 const _updateProduct = (product) => ({
   type: UPDATE_PRODUCT,
   product
 })
+=======
+>>>>>>> main
 
 // thunk creator:
 export const fetchSingleProduct = (productId) => {

@@ -1,14 +1,20 @@
 import axios from 'axios'
 
 
+<<<<<<< HEAD
 const SET_PRODUCTS = "SET_PRODUCTS"
 const CREATE_PRODUCT = "CREATE_PRODUCT"
 const DELETE_PRODUCT = "DELETE_PRODUCT"
+=======
+const SET_PRODUCTS = "SET_PRODUCTS";
+
+>>>>>>> main
 
 const setProducts = (products) => ({
     type: SET_PRODUCTS,
     products
-})
+});
+
 
 const _createProduct = (product) => ({
     type: CREATE_PRODUCT,
@@ -23,7 +29,8 @@ const _deleteProduct = (product) => ({
 export const fetchProducts = () => async (dispatch) => {
     const {data} = await axios.get('/api/products')
     dispatch(setProducts(data))
-}
+};
+
 
 export const createProduct = (product, apiHeaders) => {
     return async (dispatch) => {

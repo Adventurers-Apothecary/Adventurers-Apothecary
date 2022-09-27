@@ -1,52 +1,106 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {logout} from '../store'
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { logout } from "../store";
+import "./css/navbar.css";
 
-const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
+const Navbar = ({ handleClick, isLoggedIn }) => (
+  <div className="full-nav">
     <h1>Adventurer's Apothecary</h1>
     <h2>Feed your apothecarium side!</h2>
-    <nav>
+    <nav className="nav-container">
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <Link to="/products">View All Products</Link>
-          <Link to="/orderhistory">Order History</Link>
-          <a href="#" onClick={handleClick}>
+          <Link
+            to="/home"
+            style={{ /*color: "inherit",*/ textDecoration: "underline" }}
+          >
+            Home
+          </Link>
+          <Link
+            to="/products"
+            style={{ /*color: "inherit",*/ textDecoration: "underline" }}
+          >
+            View All Products
+          </Link>
+          <Link
+            to="/orderhistory"
+            style={{ /*color: "inherit",*/ textDecoration: "underline" }}
+          >
+            Order History
+          </Link>
+          <Link
+            to="/cart"
+            style={{ color: "inherit", textDecoration: "underline" }}
+            className="badge"
+          >
+            My Cart
+          </Link>
+          {/* <Link to="/cart" style={{ color: "inherit", textDecoration: "underline"}}><i className="material-icons"></i></Link> */}
+          <a
+            href="#"
+            onClick={handleClick}
+            style={{ color: "inherit", textDecoration: "underline" }}
+          >
             Logout
           </a>
         </div>
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
-          <Link to="/home">Home</Link>
-          <Link to="/products">View All Products</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
+          <Link
+            to="/home"
+            style={{ color: "inherit", textDecoration: "underline" }}
+          >
+            Home
+          </Link>
+          <Link
+            to="/products"
+            style={{ color: "inherit", textDecoration: "underline" }}
+          >
+            View All Products
+          </Link>
+          <Link
+            to="/cart"
+            style={{ color: "inherit", textDecoration: "underline" }}
+          >
+            My Cart
+          </Link>
+          <Link
+            to="/login"
+            style={{ color: "inherit", textDecoration: "underline" }}
+          >
+            Login
+          </Link>
+          <Link
+            to="/signup"
+            style={{ color: "inherit", textDecoration: "underline" }}
+          >
+            Sign Up
+          </Link>
         </div>
       )}
     </nav>
-    <hr />
+    {/* <hr /> */}
   </div>
-)
+);
 
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   return {
-    isLoggedIn: !!state.auth.id
-  }
-}
+    isLoggedIn: !!state.auth.id,
+  };
+};
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     handleClick() {
-      dispatch(logout())
-    }
-  }
-}
+      dispatch(logout());
+    },
+  };
+};
 
-export default connect(mapState, mapDispatch)(Navbar)
+export default connect(mapState, mapDispatch)(Navbar);

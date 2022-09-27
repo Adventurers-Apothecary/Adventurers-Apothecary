@@ -5,8 +5,12 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import auth from "./auth";
 import productsReducer from "./products";
 import singleProductReducer from "./redux/singleProduct";
+<<<<<<< HEAD
 import userReducer from "./user";
 import usersReducer from "./users";
+=======
+import cartReducer from "./cart";
+>>>>>>> main
 import cartProductsReducer from "./redux/cartProducts";
 import singleCartProductReducer from "./redux/singleCartProduct";
 
@@ -16,9 +20,11 @@ const reducer = combineReducers({
   user: userReducer,
   products: productsReducer,
   product: singleProductReducer,
+  cart: cartReducer,
   cartProducts: cartProductsReducer,
   singleCartProduct: singleCartProductReducer,
 });
+
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );

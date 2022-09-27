@@ -24,14 +24,21 @@ function SingleProduct(props) {
   const [quantityCount, setQuantity] = useState(1);
   const userId = props.auth.id;
 
-  const apiHeaders = {
-    headers: {
-      Authorization: localStorage.getItem("token"),
-    },
-  };
+  // const apiHeaders = {
+  //   headers: {
+  //     Authorization: localStorage.getItem("token"),
+  //   },
+  // };
+
+  let apiHeaders = {};
 
 
   useEffect(() => {
+    apiHeaders = {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    };
     props.getSingleProduct(id);
     if (props.auth.id) {
       props.getCartProducts(userId, apiHeaders);
@@ -45,6 +52,11 @@ function SingleProduct(props) {
   // post request test, should be integrated into redux files:
   const handleAdd = useCallback(
     async (evt) => {
+      apiHeaders = {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      };
       evt.preventDefault();
       await axios.post(
         `/api/users/${userId}/cart`,

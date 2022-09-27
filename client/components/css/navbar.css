@@ -1,0 +1,11 @@
+.full-nav {
+  background-color: #815a7d;
+  border-radius: 5px;
+  padding-top: 1px;
+  color: #f0ead2;
+}
+
+nav {
+  background-color: #a485a1;
+  border-radius: 0px 0px 5px 5px;
+}

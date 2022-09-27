@@ -121,9 +121,9 @@ async function seed() {
   ]);
 
   const cartProducts = await Promise.all([
-    Cart_Products.create({ quantity: 5, price: 3, cartId: 1, productId: 3 }),
-    Cart_Products.create({ quantity: 7, price: 15, cartId: 2, productId: 7 }),
-    Cart_Products.create({ quantity: 3, price: 3, cartId: 4, productId: 2 }),
+    Cart_Products.create({ quantity: 5, cartId: 1, productId: 3 }),
+    Cart_Products.create({ quantity: 7, cartId: 2, productId: 7 }),
+    Cart_Products.create({ quantity: 3, cartId: 4, productId: 2 }),
   ]);
 
   for (let i = 0; i < 20; i++) {

@@ -82,8 +82,9 @@ function SingleProduct(props) {
     <div className="single-product-container">
       {product && (
         <div className="product-view">
+          {props.isAdmin && <EditProduct productId={props.match.params.id} />}
           <h2>{product.name}</h2>
-          <h3>Price: ${(Math.round(product.price) / 100).toFixed(2)}</h3>
+          <h3>Price: ${product.price}</h3>
           <img
             src={product.imageUrl}
             alt="image"
@@ -116,7 +117,6 @@ function SingleProduct(props) {
           <p>
             See more in this product's category: <span>{product.category}</span>
           </p>
-          <EditProduct productId={props.match.params.id} />
         </div>
       )}
     </div>
@@ -130,6 +130,7 @@ const mapState = (state) => {
     cartProducts: state.cartProducts,
     singleCartProduct: state.singleCartProduct,
     isLoggedIn: !!state.auth.id,
+    isAdmin: !!state.auth.isAdmin,
   };
 };
 

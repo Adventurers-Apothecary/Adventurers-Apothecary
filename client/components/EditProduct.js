@@ -5,12 +5,9 @@ import {
   updateProduct,
 } from "../store/redux/singleProduct";
 import { connect, useDispatch } from "react-redux";
+import "./css/edit-product.css";
 
-const apiHeaders = {
-  headers: {
-    Authorization: localStorage.getItem("token"),
-  },
-};
+let apiHeaders = {};
 
 class EditProduct extends Component {
   constructor(props) {
@@ -29,6 +26,11 @@ class EditProduct extends Component {
   componentDidMount() {
     const id = this.props.productId;
     this.props.fetchSingleProduct(id);
+    apiHeaders = {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    };
   }
 
   componentWillUnmount() {
@@ -39,7 +41,7 @@ class EditProduct extends Component {
     if (prevProps.product.id !== this.props.product.id) {
       this.setState({
         name: this.props.product.name || "",
-        imageUrl: this.props.product.address || "",
+        imageUrl: this.props.product.imageUrl || "",
         price: this.props.product.price || 0,
         description: this.props.product.description || "",
         category: this.props.product.category || "",
@@ -54,6 +56,11 @@ class EditProduct extends Component {
   }
 
   handleSubmit(evt) {
+    apiHeaders = {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    };
     evt.preventDefault();
     this.props.updateProduct(
       { ...this.props.product, ...this.state },
@@ -66,28 +73,35 @@ class EditProduct extends Component {
     const { handleSubmit, handleChange } = this;
     return (
       <div>
-        <h3>Edit Product</h3>
-        <form className="product-form" onSubmit={handleSubmit}>
-          <label htmlFor="name">Name:</label>
-          <input name="name" onChange={handleChange} value={name} />
+        <h3>ADMINS: Edit Product</h3>
+        <div className="edit-product-form-container">
+          <form className="edit-product-form" onSubmit={handleSubmit}>
+            <span>
+              <label htmlFor="name">Name:</label>
+              <input name="name" onChange={handleChange} value={name} />
 
-          <label htmlFor="imageUrl">Image URL:</label>
-          <input name="imageUrl" onChange={handleChange} value={imageUrl} />
+              <label htmlFor="imageUrl">Image URL:</label>
+              <input name="imageUrl" onChange={handleChange} value={imageUrl} />
+              <label htmlFor="price">Price:</label>
+              <input name="price" onChange={handleChange} value={price} />
+            </span>
+            <span>
+              <label htmlFor="description">Description:</label>
+              <input
+                name="description"
+                onChange={handleChange}
+                value={description}
+              />
 
-          <label htmlFor="price">Price:</label>
-          <input name="price" onChange={handleChange} value={price} />
-
-          <label htmlFor="description">Description:</label>
-          <input
-            name="description"
-            onChange={handleChange}
-            value={description}
-          />
-
-          <label htmlFor="category">Category:</label>
-          <input name="category" onChange={handleChange} value={category} />
-          <button>Submit</button>
-        </form>
+              <label htmlFor="category">Category:</label>
+              <input name="category" onChange={handleChange} value={category} />
+            </span>
+            <br />
+            <span>
+              <button>Submit</button>
+            </span>
+          </form>
+        </div>
       </div>
     );
   }

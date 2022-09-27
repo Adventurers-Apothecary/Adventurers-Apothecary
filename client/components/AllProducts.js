@@ -28,7 +28,7 @@ export class AllProducts extends React.Component {
                 <Link to={`/products/${product.id}`}>{product.name}</Link>
               </h2>
               <img className="product-img" src={product.imageUrl} />
-              <p>${(Math.round(product.price) / 100).toFixed(2)}</p>
+              <p>${product.price}</p>
             </div>
           ))}
         </div>

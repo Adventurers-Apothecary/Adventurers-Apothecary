@@ -1,12 +1,9 @@
 import React, { Component } from "react";
 import { createProduct, fetchProducts } from "../store/products";
 import { connect } from "react-redux";
+import "./css/create-product-form.css";
 
-const apiHeaders = {
-  headers: {
-    Authorization: localStorage.getItem("token"),
-  },
-};
+let apiHeaders = {};
 
 class CreateProduct extends Component {
   constructor() {
@@ -22,6 +19,15 @@ class CreateProduct extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    // not sure if this one helps or is needed;
+    apiHeaders = {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    };
+  }
+
   handleChange(evt) {
     this.setState({
       [evt.target.name]: evt.target.value,
@@ -29,6 +35,11 @@ class CreateProduct extends Component {
   }
 
   handleSubmit(evt) {
+    apiHeaders = {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    };
     evt.preventDefault();
     this.props.createProduct({ ...this.state }, apiHeaders);
   }
@@ -39,8 +50,8 @@ class CreateProduct extends Component {
 
     return (
       <div>
-        <form className="product-form" onSubmit={handleSubmit}>
-          <h3>Create Product</h3>
+        <form className="create-product-form" onSubmit={handleSubmit}>
+          <h3>ADMINS: Create Product</h3>
           <div>
             <label htmlFor="name">Name:</label>
             <input name="name" onChange={handleChange} value={name} />
@@ -59,7 +70,7 @@ class CreateProduct extends Component {
             />
             <label htmlFor="category">Category:</label>
             <input name="category" onChange={handleChange} value={category} />
-
+            <br />
             <button type="submit">Submit</button>
           </div>
         </form>

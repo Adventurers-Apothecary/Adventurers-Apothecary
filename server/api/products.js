@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const {
-  models: { User, Product},
+  models: { User, Product },
 } = require("../db");
 const { requireToken, isAdmin } = require("./gatekeepingMiddleware");
 module.exports = router;
@@ -8,7 +8,12 @@ module.exports = router;
 router.get("/", async (req, res, next) => {
   try {
     //not protected as all users should have access
-    const products = await Product.findAll();
+    const products = await Product.findAll({
+      order: [
+        ["category", "DESC"],
+        ["id", "ASC"],
+      ],
+    });
     res.json(products);
   } catch (err) {
     next(err);

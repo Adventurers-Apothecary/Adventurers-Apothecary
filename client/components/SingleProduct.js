@@ -7,6 +7,7 @@ import {
   fetchSingleProduct,
   setSingleProduct,
 } from "../store/redux/singleProduct";
+import EditProduct from "./EditProduct";
 
 import { fetchCartProducts } from "../store/redux/cartProducts";
 
@@ -55,10 +56,12 @@ function SingleProduct(props) {
         },
       };
       evt.preventDefault();
+      // const productPrice = props.singleProduct.price;
       await axios.post(
         `/api/users/${userId}/cart`,
         {
           quantity: quantityCount,
+          // price: productPrice,
           productId: id,
         },
         apiHeaders
@@ -91,6 +94,7 @@ function SingleProduct(props) {
     <div className="single-product-container">
       {product && (
         <div className="product-view">
+          {props.isAdmin && <EditProduct productId={props.match.params.id} />}
           <h2>{product.name}</h2>
           <h3>Price: ${product.price}</h3>
           <img
@@ -138,6 +142,7 @@ const mapState = (state) => {
     cartProducts: state.cartProducts,
     singleCartProduct: state.singleCartProduct,
     isLoggedIn: !!state.auth.id,
+    isAdmin: !!state.auth.isAdmin,
   };
 };
 

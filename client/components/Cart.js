@@ -124,7 +124,13 @@ export class Cart extends React.Component {
               </div>
             ))}
         </div>
-        <button className="checkout">Proceed To Checkout</button>
+        <Link
+          to="/checkout"
+          className="checkout"
+          style={{ color: "inherit", textDecoration: "underline" }}
+        >
+          Proceed To Checkout
+        </Link>
         {/* will need an onClick for this button to get to the checkout page */}
       </div>
     );
@@ -135,6 +141,7 @@ const mapState = (state) => {
   return {
     cart: state.cart,
     auth: state.auth,
+    isLoggedIn: !!state.auth.id,
   };
 };
 

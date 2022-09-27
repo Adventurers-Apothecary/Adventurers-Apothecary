@@ -2,7 +2,7 @@ import axios from "axios";
 import history from "../history";
 
 const SET_CART = "SET_CART";
-const UPDATE_QUANTITY = "UPDATE_QUANTITY";
+// const UPDATE_QUANTITY = "UPDATE_QUANTITY";
 const DELETE_ITEM = "DELETE_ITEM";
 const PROCEED_TO_CHECKOUT = "PROCEED_TO_CHECKOUT";
 
@@ -16,11 +16,11 @@ export const setCart = (cart) => ({
   cart,
 });
 
-const editQuantity = (quantity) => ({
-  type: UPDATE_QUANTITY,
-  productId,
-  // or should this be productId, or quantity?
-});
+// const editQuantity = (quantity) => ({
+//   type: UPDATE_QUANTITY,
+//   productId,
+//   // or should this be productId, or quantity?
+// });
 
 const deleteProduct = (product) => ({
   type: DELETE_ITEM,
@@ -43,25 +43,25 @@ export const fetchCart = (userId, apiHeaders) => {
   };
 };
 
-export const increaseQuantity = (userId, quantity, apiHeaders) => {
-  return async (dispatch) => {
-    const { data } = await axios.put(
-      `/api/users/${userId}/cart/${productId}/increase`,
-      apiHeaders
-    );
-    dispatch(editQuantity(data));
-  };
-};
+// export const increaseQuantity = (userId, quantity, apiHeaders) => {
+//   return async (dispatch) => {
+//     const { data } = await axios.put(
+//       `/api/users/${userId}/cart/${productId}/increase`,
+//       apiHeaders
+//     );
+//     dispatch(editQuantity(data));
+//   };
+// };
 
-export const decreaseQuantity = (userId, quantity, apiHeaders) => {
-  return async (dispatch) => {
-    const { data } = await axios.put(
-      `/api/users/${userId}/cart/${productId}/decrease`,
-      apiHeaders
-    );
-    dispatch(editQuantity(data));
-  };
-};
+// export const decreaseQuantity = (userId, quantity, apiHeaders) => {
+//   return async (dispatch) => {
+//     const { data } = await axios.put(
+//       `/api/users/${userId}/cart/${productId}/decrease`,
+//       apiHeaders
+//     );
+//     dispatch(editQuantity(data));
+//   };
+// };
 
 export const deleteItem = (userId, productId, apiHeaders) => {
   return async (dispatch) => {
@@ -91,10 +91,10 @@ export default function cartReducer(cart = [], action) {
   switch (action.type) {
     case SET_CART:
       return action.cart;
-    case UPDATE_QUANTITY:
-      return cart.map((cart) =>
-        cart.id === action.cart.id ? action.cart : cart
-      );
+    // case UPDATE_QUANTITY:
+    //   return cart.map((cart) =>
+    //     cart.id === action.cart.id ? action.cart : cart
+    //   );
     case DELETE_ITEM:
       return cart.filter(
         (product) => product.id !== action.product.id

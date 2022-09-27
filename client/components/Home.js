@@ -1,11 +1,11 @@
-import React from 'react'
-import {connect} from 'react-redux'
+import React from "react";
+import { connect } from "react-redux";
 
 /**
  * COMPONENT
  */
-export const Home = (props, {isLoggedIn}) => {
-  const {username} = props
+export const Home = (props, { isLoggedIn }) => {
+  const { username } = props;
 
   return (
     <div className="home">
@@ -15,22 +15,27 @@ export const Home = (props, {isLoggedIn}) => {
         </div>
       ) : (
         <div>
-          <h2>Welcome to your apothecary {username}!</h2>
+          <h2>Welcome to your apothecary, {username}!</h2>
+          {props.isAdmin && (
+            <div>
+              <h3>You are an ADMIN.</h3>
+              <p>You can add products and edit products!</p>
+            </div>
+          )}
         </div>
       )}
     </div>
-    
-
-  )
-}
+  );
+};
 
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   return {
-    username: state.auth.username
-  }
-}
+    username: state.auth.username,
+    isAdmin: !!state.auth.isAdmin,
+  };
+};
 
-export default connect(mapState)(Home)
+export default connect(mapState)(Home);

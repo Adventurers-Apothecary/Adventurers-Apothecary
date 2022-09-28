@@ -9,11 +9,7 @@ export const Home = (props, { isLoggedIn }) => {
 
   return (
     <div className="home">
-      {isLoggedIn ? (
-        <div>
-          <h2>Welcome to your apothecary!</h2>
-        </div>
-      ) : (
+      {props.isLoggedIn ? (
         <div>
           <h2>Welcome to your apothecary, {username}!</h2>
           {props.isAdmin && (
@@ -22,6 +18,10 @@ export const Home = (props, { isLoggedIn }) => {
               <p>You can add products and edit products!</p>
             </div>
           )}
+        </div>
+      ) : (
+        <div>
+          <h2>Welcome to your apothecary!</h2>
         </div>
       )}
     </div>
@@ -34,6 +34,7 @@ export const Home = (props, { isLoggedIn }) => {
 const mapState = (state) => {
   return {
     username: state.auth.username,
+    isLoggedIn: state.auth.id,
     isAdmin: !!state.auth.isAdmin,
   };
 };

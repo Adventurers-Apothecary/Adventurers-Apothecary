@@ -19,16 +19,20 @@ export class AllProducts extends React.Component {
   render() {
     return (
       <main className="product-container">
-        <h2>Products</h2>
+        <h2>All Products</h2>
         {this.props.isAdmin ? <CreateProduct /> : null}
         <div className="products">
           {this.props.products.map((product) => (
             <div className="product" key={product.id}>
-              <h3>
-                <Link to={`/products/${product.id}`}>{product.name}</Link>
-              </h3>
-              <img className="product-img" src={product.imageUrl} />
-              <p>${product.price}</p>
+              <Link to={`/products/${product.id}`}>
+                <img className="product-img" src={product.imageUrl} />
+              </Link>
+              <div className="product-info">
+                <h3>
+                  <Link to={`/products/${product.id}`}>{product.name}</Link>
+                </h3>
+                <p>${(Math.round(product.price) / 100).toFixed(2)}</p>
+              </div>
             </div>
           ))}
         </div>

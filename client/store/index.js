@@ -10,6 +10,7 @@ import singleProductReducer from "./redux/singleProduct";
 import cartReducer from "./cart";
 import cartProductsReducer from "./redux/cartProducts";
 import singleCartProductReducer from "./redux/singleCartProduct";
+import userCartsReducer from "./redux/userCarts";
 
 const reducer = combineReducers({
   auth,
@@ -20,6 +21,7 @@ const reducer = combineReducers({
   cart: cartReducer,
   cartProducts: cartProductsReducer,
   singleCartProduct: singleCartProductReducer,
+  userCarts: userCartsReducer,
 });
 
 const middleware = composeWithDevTools(

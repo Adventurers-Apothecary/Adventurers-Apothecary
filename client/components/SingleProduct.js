@@ -92,43 +92,67 @@ function SingleProduct(props) {
 
   return (
     <div className="single-product-container">
+      {props.isAdmin && <EditProduct productId={props.match.params.id} />}
       {product && (
         <div className="product-view">
-          {props.isAdmin && <EditProduct productId={props.match.params.id} />}
-          <h2>{product.name}</h2>
-          <h3>Price: ${product.price}</h3>
-          <img
-            src={product.imageUrl}
-            alt="image"
-            className="single-product-img"
-          />
-          <p>{product.description}</p>
-          {!props.isLoggedIn && <p>For now: please log in to shop.</p>}
-          {props.cartProducts &&
-          props.isLoggedIn &&
-          props.cartProducts.map((elem) => elem.id).includes(+id) ? (
-            <div>
-              <EditQuantity quant={props.singleCartProduct.quantity} />
+          <div className="single-product-left">
+            <img
+              src={product.imageUrl}
+              alt="image"
+              className="single-product-img"
+            />
+          </div>
+          <div className="single-product-info">
+            <div className="info-top">
+              <h2>{product.name}</h2>
+              <h3>Price: ${(Math.round(product.price) / 100).toFixed(2)}</h3>
+              <p>{product.description}</p>
+              <p style={{ fontSize: "90%", fontStyle: "italic" }}>
+                category: {product.category}
+              </p>
             </div>
-          ) : (
-            props.isLoggedIn && (
-              <form onSubmit={handleAdd}>
-                <span>
-                  <button onClick={increaseQuantity}>+</button>
-                  <label htmlFor="quantityCount">
-                    Quantity: {quantityCount}
-                  </label>
-                  <button onClick={decreaseQuantity}>-</button>
-                </span>
-                <p>
-                  <button type="submit">Add To Cart</button>
-                </p>
-              </form>
-            )
-          )}
-          <p>
-            See more in this product's category: <span>{product.category}</span>
-          </p>
+            <div className="info-bottom">
+              {!props.isLoggedIn && <p>For now: please log in to shop.</p>}
+              {props.cartProducts &&
+              props.isLoggedIn &&
+              props.cartProducts.map((elem) => elem.id).includes(+id) ? (
+                <div>
+                  <EditQuantity quant={props.singleCartProduct.quantity} />
+                </div>
+              ) : (
+                props.isLoggedIn && (
+                  <form onSubmit={handleAdd} className="add-to-cart-buttons">
+                    <button
+                      onClick={decreaseQuantity}
+                      className="circle-button"
+                    >
+                      -
+                    </button>
+
+                    <label htmlFor="quantityCount">
+                      Quantity: {quantityCount}
+                    </label>
+                    <button
+                      onClick={increaseQuantity}
+                      className="circle-button"
+                    >
+                      +
+                    </button>
+
+                    <p className="edit-quant-submit-buttons">
+                      <button type="submit" style={{ padding: "5px" }}>
+                        Add To Cart
+                      </button>
+                    </p>
+                  </form>
+                )
+              )}
+              {/* <p>
+                See more in this product's category:{" "}
+                <span>{product.category}</span>
+              </p> */}
+            </div>
+          </div>
         </div>
       )}
     </div>

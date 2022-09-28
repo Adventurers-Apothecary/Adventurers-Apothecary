@@ -11,12 +11,17 @@ import {
 } from "../store/cart";
 import { me } from "../store/auth";
 import "./css/cart.css";
+import axios from "axios";
 
 let apiHeaders = {};
+let checkoutPrice = 0;
 
-export class Cart extends React.Component {
+export class Checkout extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      purchased: false,
+    };
   }
 
   async componentDidMount() {
@@ -36,7 +41,11 @@ export class Cart extends React.Component {
   render() {
     return (
       <div className="cart-container">
-        <h2>Great things are waiting for you!</h2>
+        {this.state.purchased ? (
+          <h2>You just purchased:</h2>
+        ) : (
+          <h2>You will purchase:</h2>
+        )}
         <div className="cart-products">
           {this.props.cart[0] &&
             this.props.cart.map((cart) => (
@@ -51,57 +60,9 @@ export class Cart extends React.Component {
                     alt="product-image"
                     className="cart-product-img"
                   />
-                  <div className="cart-quantity-container">
-                    <form onSubmit={(evt) => evt.preventDefault()}>
-                      {/* // onClick={this.props.increaseQuantity(this.props.match.params.productId)} */}
-                      <button
-                        className="update-quantity"
-                        onClick={async () => {
-                          if (cart.cart_products.quantity > 1) {
-                            let updatedQuant = cart.cart_products.quantity - 1;
-                            await this.props.updateItem(
-                              this.props.auth.id,
-                              cart.id,
-                              { quantity: updatedQuant },
-                              apiHeaders
-                            );
-                            await this.props.fetchCart(
-                              this.props.auth.id,
-                              apiHeaders
-                            );
-                          }
-                        }}
-                      >
-                        -
-                      </button>
-                    </form>
-
-                    <p>Quantity: {cart.cart_products.quantity}</p>
-
-                    <form onSubmit={(evt) => evt.preventDefault()}>
-                      {/* // onClick={this.props.increaseQuantity(this.props.match.params.productId)} */}
-                      <button
-                        className="update-quantity"
-                        onClick={async () => {
-                          let updatedQuant = cart.cart_products.quantity + 1;
-                          await this.props.updateItem(
-                            this.props.auth.id,
-                            cart.id,
-                            { quantity: updatedQuant },
-                            apiHeaders
-                          );
-                          await this.props.fetchCart(
-                            this.props.auth.id,
-                            apiHeaders
-                          );
-                        }}
-                      >
-                        +
-                      </button>
-                    </form>
-                  </div>
+                  <div className="cart-quantity-container"></div>
                   {/* <br /> */}
-                  <form onSubmit={(evt) => evt.preventDefault()}>
+                  {/* <form onSubmit={(evt) => evt.preventDefault()}>
                     <button
                       className="delete-product"
                       onClick={async () => {
@@ -115,7 +76,7 @@ export class Cart extends React.Component {
                     >
                       Remove
                     </button>
-                  </form>
+                  </form> */}
                   <p className="total" style={{ fontWeight: "bold" }}>
                     Total: {/* <span style={{fontWeight: "bold"}> */}
                     {Math.round(
@@ -140,14 +101,56 @@ export class Cart extends React.Component {
             ).toFixed(2)}
           </h2>
         ) : null}
-        {this.props.cart[0] && (
-          <Link
-            to="/checkout"
-            className="checkout"
-            style={{ color: "inherit", textDecoration: "underline" }}
-          >
-            Proceed To Checkout
-          </Link>
+        <form onSubmit={(evt) => evt.preventDefault()}>
+          {this.state.purchased ? null : (
+            <button
+              onClick={async () => {
+                (checkoutPrice = this.props.cart.reduce(
+                  (acc, cart) =>
+                    acc + cart.cart_products.quantity * Number(cart.price),
+                  0
+                )),
+                  (apiHeaders = {
+                    headers: {
+                      Authorization: localStorage.getItem("token"),
+                    },
+                  });
+                await axios.put(
+                  `/api/carts/${this.props.auth.id}`,
+                  {
+                    isComplete: true,
+                    totalPrice: checkoutPrice,
+                  },
+                  apiHeaders
+                );
+                await this.setState((state) => ({
+                  purchased: true,
+                }));
+              }}
+            >
+              COMPLETE PURCHASE
+            </button>
+          )}
+        </form>
+        {this.state.purchased ? (
+          <p>
+            {" "}
+            <Link
+              to="/products"
+              style={{ color: "inherit", textDecoration: "underline" }}
+            >
+              Keep Shopping!
+            </Link>
+          </p>
+        ) : (
+          <p>
+            <Link
+              to="/cart"
+              style={{ color: "inherit", textDecoration: "underline" }}
+            >
+              Back To Cart
+            </Link>
+          </p>
         )}
         {/* will need an onClick for this button to get to the checkout page */}
       </div>
@@ -177,6 +180,4 @@ const mapDispatch = (dispatch, { history }) => {
   };
 };
 
-export default connect(mapState, mapDispatch)(Cart);
-
-// // onClick={this.props.increaseQuantity(this.props.match.params.productId)}
+export default connect(mapState, mapDispatch)(Checkout);

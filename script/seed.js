@@ -22,8 +22,7 @@ async function seed() {
       name: "Chamomile",
       price: 3.5,
       category: "seeds",
-      imageUrl:
-        "https://images.squarespace-cdn.com/content/v1/55674e06e4b0830d6f6d4322/1434731100813-B54G5WATAWUENQNZ87W9/german+chamomile.jpg",
+      imageUrl: "https://i.imgur.com/nvPD6Xd.png",
       description:
         "Commonly used to make herbal infusions.  Can be used in teas, sooth stiff muscles and helps in treating skin irritations",
     }),
@@ -32,8 +31,7 @@ async function seed() {
       name: "Elderberry",
       price: 3.0,
       category: "seeds",
-      imageUrl:
-        "https://upload.wikimedia.org/wikipedia/commons/a/a9/Sambucus-berries.jpg",
+      imageUrl: "https://i.imgur.com/VwYMSPM.png",
       description:
         "Packed with antioxidants and vitamins.  Can be used to create medicine to help treat headaches or cooked to make juice, jams, and chutneys",
     }),

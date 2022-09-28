@@ -10,6 +10,9 @@ const Cart = db.define("cart", {
       notEmpty: true,
     },
   },
+  totalPrice: {
+    type: Sequelize.INTEGER,
+  },
 });
 
 module.exports = Cart;

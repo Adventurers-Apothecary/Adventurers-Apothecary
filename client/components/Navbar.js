@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { logout } from "../store";
 import "./css/navbar.css";
 
+
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div className="full-nav">
     <img className="brand-image" src="https://live.staticflickr.com/65535/52388139047_674b5e1fe8_b.jpg" alt="Adventurer's Apothecary logo"/>
@@ -31,15 +32,17 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           </Link>
           <Link
             to="/cart"
-            style={{ color: "inherit", textDecoration: "underline" }}
-            className="badge"
+            style={{ /*color: "inherit",*/ textDecoration: "underline" }}
+            className="active"
           >
-            My Cart
+            <span>My Cart</span>
+            <span className="badge">({})</span>
+            
           </Link>
           <a
             href="#"
             onClick={handleClick}
-            style={{ color: "inherit", textDecoration: "underline" }}
+            style={{ /*color: "inherit",*/ textDecoration: "underline" }}
           >
             Logout
           </a>
@@ -53,18 +56,23 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           >
             Home
           </Link>
+
           <Link
             to="/products"
             style={{ color: "inherit", textDecoration: "underline" }}
           >
             View All Products
           </Link>
+
           <Link
             to="/cart"
             style={{ color: "inherit", textDecoration: "underline" }}
           >
-            My Cart
+            <span>My Cart</span>
+            <span className="badge">({ })</span>
+
           </Link>
+
           <Link
             to="/login"
             style={{ color: "inherit", textDecoration: "underline" }}

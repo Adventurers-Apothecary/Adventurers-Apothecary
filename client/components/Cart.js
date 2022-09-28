@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import {
   fetchCart,
   deleteItem,
-  increaseQuantity,
-  decreaseQuantity,
+//   increaseQuantity,
+//   decreaseQuantity,
   setCart,
   updateProduct,
 } from "../store/cart";
@@ -28,6 +28,7 @@ export class Cart extends React.Component {
     };
     await this.props.me();
     await this.props.fetchCart(this.props.auth.id, apiHeaders);
+    // await this.props.getCartProducts(this.props.auth.id, apiHeaders);
   }
 
   componentWillUnmount() {
@@ -38,6 +39,13 @@ export class Cart extends React.Component {
     return (
       <div className="cart-container">
         <h2>Great things are waiting for you!</h2>
+        <Link
+          to="/checkout"
+          className="checkout"
+          style={{ color: "inherit", textDecoration: "underline" }}
+        >
+          Proceed To Checkout
+        </Link>
         <div className="cart-products">
           {this.props.cart[0] &&
             this.props.cart.map((cart) => (
@@ -51,7 +59,6 @@ export class Cart extends React.Component {
                 />
                 <div className="cart-quantity-container">
                   <form onSubmit={(evt) => evt.preventDefault()}>
-                    {/* // onClick={this.props.increaseQuantity(this.props.match.params.productId)} */}
                     <button
                       className="update-quantity"
                       onClick={async () => {
@@ -75,7 +82,6 @@ export class Cart extends React.Component {
                   <p>Quantity: {cart.cart_products.quantity}</p>
 
                   <form onSubmit={(evt) => evt.preventDefault()}>
-                    {/* // onClick={this.props.increaseQuantity(this.props.match.params.productId)} */}
                     <button
                       className="update-quantity"
                       onClick={async () => {
@@ -124,14 +130,6 @@ export class Cart extends React.Component {
               </div>
             ))}
         </div>
-        <Link
-          to="/checkout"
-          className="checkout"
-          style={{ color: "inherit", textDecoration: "underline" }}
-        >
-          Proceed To Checkout
-        </Link>
-        {/* will need an onClick for this button to get to the checkout page */}
       </div>
     );
   }
@@ -161,4 +159,3 @@ const mapDispatch = (dispatch, { history }) => {
 
 export default connect(mapState, mapDispatch)(Cart);
 
-// // onClick={this.props.increaseQuantity(this.props.match.params.productId)}

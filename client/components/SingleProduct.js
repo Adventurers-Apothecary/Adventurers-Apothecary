@@ -105,7 +105,7 @@ function SingleProduct(props) {
           <div className="single-product-info">
             <div className="info-top">
               <h2>{product.name}</h2>
-              <h3>Price: ${product.price}</h3>
+              <h3>Price: ${(Math.round(product.price) / 100).toFixed(2)}</h3>
               <p>{product.description}</p>
               <p style={{ fontSize: "90%", fontStyle: "italic" }}>
                 category: {product.category}

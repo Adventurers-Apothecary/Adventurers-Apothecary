@@ -42,7 +42,7 @@ class EditProduct extends Component {
       this.setState({
         name: this.props.product.name || "",
         imageUrl: this.props.product.imageUrl || "",
-        price: this.props.product.price || 0,
+        price: this.props.product.price / 100 || 0,
         description: this.props.product.description || "",
         category: this.props.product.category || "",
       });

@@ -53,7 +53,7 @@ export class OrderHistory extends React.Component {
                     <td
                       style={{
                         border: "2px solid",
-                        width: "200px",
+                        minWidth: "80px",
                         borderCollapse: "collapse",
                       }}
                     >
@@ -62,11 +62,20 @@ export class OrderHistory extends React.Component {
                     <td
                       style={{
                         border: "2px solid",
-                        width: "200px",
+                        minWidth: "120px",
                         borderCollapse: "collapse",
                       }}
                     >
-                      Price: {Math.round(cart.totalPrice / 100).toFixed(2)}
+                      {cart.createdAt.split("T")[0]}
+                    </td>
+                    <td
+                      style={{
+                        border: "2px solid",
+                        minWidth: "80px",
+                        borderCollapse: "collapse",
+                      }}
+                    >
+                      ${Math.round(cart.totalPrice / 100).toFixed(2)}
                     </td>
                   </tr>
                 </tbody>

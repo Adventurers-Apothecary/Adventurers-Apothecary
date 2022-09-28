@@ -14,6 +14,7 @@ import "./css/cart.css";
 import axios from "axios";
 
 let apiHeaders = {};
+let checkoutPrice = 0;
 
 export class Cart extends React.Component {
   constructor(props) {
@@ -104,15 +105,21 @@ export class Cart extends React.Component {
           {this.state.purchased ? null : (
             <button
               onClick={async () => {
-                apiHeaders = {
-                  headers: {
-                    Authorization: localStorage.getItem("token"),
-                  },
-                };
+                (checkoutPrice = this.props.cart.reduce(
+                  (acc, cart) =>
+                    acc + cart.cart_products.quantity * Number(cart.price),
+                  0
+                )),
+                  (apiHeaders = {
+                    headers: {
+                      Authorization: localStorage.getItem("token"),
+                    },
+                  });
                 await axios.put(
                   `/api/carts/${this.props.auth.id}`,
                   {
                     isComplete: true,
+                    totalPrice: checkoutPrice,
                   },
                   apiHeaders
                 );

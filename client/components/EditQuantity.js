@@ -2,6 +2,7 @@ import React, { useEffect, useCallback, useState } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import "./css/single-product.css";
+import "./css/cart.css";
 
 import {
   fetchSingleProduct,
@@ -84,25 +85,36 @@ function EditQuantity(props) {
   );
 
   return (
-    <div>
-      <p>
+    <div className="edit-quant">
+      <p style={{ fontWeight: "bold" }}>
         You currently have{" "}
         {props.singleCartProduct.quantity
           ? props.singleCartProduct.quantity
           : null}{" "}
         in your cart.
       </p>
-      <form onSubmit={handleUpdate}>
-        <span>
-          <button onClick={increaseQuantity}>+</button>
-          <label htmlFor="quantityCount">Quantity: {quantityCount}</label>
-          <button onClick={decreaseQuantity}>-</button>
-        </span>
-        <p>
-          <button type="submit">Edit Quantity</button>
-          <button onClick={handleDelete}>Remove From Cart</button>
-        </p>
-      </form>
+      <div className="edit-quant-buttons">
+        <button onClick={decreaseQuantity} className="circle-button">
+          -
+        </button>
+        <label htmlFor="quantityCount">Quantity: {quantityCount}</label>
+        <button onClick={increaseQuantity} className="circle-button">
+          +
+        </button>
+
+        <form onSubmit={handleUpdate}>
+          <p className="edit-quant-submit-buttons">
+            <button
+              type="submit"
+              style={{ marginRight: "10px" }}
+              className="edit-quant-button"
+            >
+              Edit Quantity
+            </button>
+            <button onClick={handleDelete}>Remove From Cart</button>
+          </p>
+        </form>
+      </div>
     </div>
   );
 }

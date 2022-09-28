@@ -1,4 +1,6 @@
 .single-product-img {
+  border-style: solid;
+  border-color: #815a7d;
   max-width: 550px;
   max-height: 500px;
   width: auto;

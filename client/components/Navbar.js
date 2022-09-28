@@ -6,7 +6,11 @@ import "./css/navbar.css";
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div className="full-nav">
-    <img className="brand-image" src="https://live.staticflickr.com/65535/52388139047_674b5e1fe8_b.jpg" alt="Adventurer's Apothecary logo"/>
+    <img
+      className="brand-image"
+      src="https://live.staticflickr.com/65535/52388139047_674b5e1fe8_b.jpg"
+      alt="Adventurer's Apothecary logo"
+    />
     <nav className="nav-container">
       {isLoggedIn ? (
         <div>
@@ -31,7 +35,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           </Link>
           <Link
             to="/cart"
-            style={{ color: "inherit", textDecoration: "underline" }}
+            style={{ textDecoration: "underline" }}
             className="badge"
           >
             My Cart
@@ -39,7 +43,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           <a
             href="#"
             onClick={handleClick}
-            style={{ color: "inherit", textDecoration: "underline" }}
+            style={{ textDecoration: "underline" }}
           >
             Logout
           </a>

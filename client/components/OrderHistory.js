@@ -66,7 +66,7 @@ export class OrderHistory extends React.Component {
                         borderCollapse: "collapse",
                       }}
                     >
-                      {cart.createdAt.split("T")[0]}
+                      {cart.updatedAt.split("T")[0]}
                     </td>
                     <td
                       style={{

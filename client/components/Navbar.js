@@ -33,9 +33,10 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           <Link
             to="/cart"
             style={{ /*color: "inherit",*/ textDecoration: "underline" }}
-            className="badge"
+            className="active"
           >
             <span>My Cart</span>
+            <span className="badge">({})</span>
             
           </Link>
           <a
@@ -55,18 +56,23 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           >
             Home
           </Link>
+
           <Link
             to="/products"
             style={{ color: "inherit", textDecoration: "underline" }}
           >
             View All Products
           </Link>
+
           <Link
             to="/cart"
             style={{ color: "inherit", textDecoration: "underline" }}
           >
-            My Cart
+            <span>My Cart</span>
+            <span className="badge">({ })</span>
+
           </Link>
+
           <Link
             to="/login"
             style={{ color: "inherit", textDecoration: "underline" }}

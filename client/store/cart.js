@@ -4,11 +4,10 @@ import history from "../history";
 const SET_CART = "SET_CART";
 // const UPDATE_QUANTITY = "UPDATE_QUANTITY";
 const DELETE_ITEM = "DELETE_ITEM";
-const PROCEED_TO_CHECKOUT = "PROCEED_TO_CHECKOUT";
-
-// new >
+// const PROCEED_TO_CHECKOUT = "PROCEED_TO_CHECKOUT";
 const UPDATE_PRODUCT_IN_CART = "UPDATE_PRODUCT_IN_CART";
-// < new
+
+
 
 // action creators:
 export const setCart = (cart) => ({
@@ -25,7 +24,6 @@ export const setCart = (cart) => ({
 const deleteProduct = (product) => ({
   type: DELETE_ITEM,
   product,
-  // should this be productId?
 });
 
 // new >

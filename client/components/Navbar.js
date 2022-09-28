@@ -28,6 +28,12 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
             View All Products
           </Link>
           <Link
+            to="/orderhistory"
+            style={{ /*color: "inherit",*/ textDecoration: "underline" }}
+          >
+            Order History
+          </Link>
+          <Link
             to="/cart"
             style={{ textDecoration: "underline" }}
             className="badge"
@@ -81,11 +87,6 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
     {/* <hr /> */}
   </div>
 );
-
-// REMOVED ORDER HISTORY LINK:
-// <Link to="/orderhistory" style={{ /*color: "inherit",*/ textDecoration: "underline" }}>
-// Order History
-// </Link>
 
 /**
  * CONTAINER

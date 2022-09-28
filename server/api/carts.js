@@ -21,7 +21,7 @@ router.get(
           isComplete: true,
         },
       });
-      res.send(singleCart);
+      res.send(allUserCarts);
     } catch (error) {
       next(error);
     }

@@ -16,7 +16,7 @@ import axios from "axios";
 let apiHeaders = {};
 let checkoutPrice = 0;
 
-export class Cart extends React.Component {
+export class Checkout extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -180,4 +180,4 @@ const mapDispatch = (dispatch, { history }) => {
   };
 };
 
-export default connect(mapState, mapDispatch)(Cart);
+export default connect(mapState, mapDispatch)(Checkout);

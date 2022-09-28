@@ -20,6 +20,7 @@ router.get(
           userId: req.user.dataValues.id,
           isComplete: true,
         },
+        order: [["createdAt", "DESC"]],
       });
       res.send(allUserCarts);
     } catch (error) {
